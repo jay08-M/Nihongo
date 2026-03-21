@@ -95,11 +95,22 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/decksTitle">
 
+            <TextView
+                android:id="@+id/tvNoDecks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No recent decks"
+                android:textColor="#1A1A1A"
+                android:visibility="gone"
+                android:layout_marginBottom="12dp"/>
+
             <RelativeLayout
+                android:id="@+id/layoutDeck1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
                 <TextView
+                    android:id="@+id/tvDeckName1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -119,10 +130,12 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/layoutDeck2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp">
                 <TextView
+                    android:id="@+id/tvDeckName2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
