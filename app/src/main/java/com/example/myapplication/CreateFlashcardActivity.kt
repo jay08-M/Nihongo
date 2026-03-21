@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -22,60 +23,80 @@ class CreateFlashcardActivity : AppCompatActivity() {
         val btnCreatePractice = findViewById<Button>(R.id.btnCreatePractice)
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         
-        // Set 'Decks' as selected
         bottomNavigation.selectedItemId = R.id.nav_decks
 
-        // Function to add a new card item to the container
         fun addNewCardItem() {
             val inflater = LayoutInflater.from(this)
             val newCardView = inflater.inflate(R.layout.item_flashcard_input, flashcardListContainer, false)
             flashcardListContainer.addView(newCardView)
         }
 
-        // Add logic for 'Add' button to create a new card field
         btnAddCard.setOnClickListener {
             addNewCardItem()
-            Toast.makeText(this, "New flashcard added to list", Toast.LENGTH_SHORT).show()
         }
 
-        // Logic for Create buttons
-        btnCreateFinal.setOnClickListener {
+        fun validateAndGetDeck(): Deck? {
             val deckName = deckNameInput.text.toString().trim()
-            if (deckName.isNotEmpty()) {
-                Toast.makeText(this, "Deck '$deckName' created with ${flashcardListContainer.childCount} cards!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Please enter a deck name", Toast.LENGTH_SHORT).show()
+            if (deckName.isEmpty()) {
+                deckNameInput.error = "Deck name is required"
+                return null
+            }
+
+            val flashcards = mutableListOf<Flashcard>()
+            for (i in 0 until flashcardListContainer.childCount) {
+                val cardView = flashcardListContainer.getChildAt(i)
+                val frontInput = cardView.findViewById<EditText>(R.id.cardFrontInput)
+                val backInput = cardView.findViewById<EditText>(R.id.cardBackInput)
+
+                val frontText = frontInput.text.toString().trim()
+                val backText = backInput.text.toString().trim()
+
+                if (frontText.isEmpty()) {
+                    frontInput.error = "Front side required"
+                    return null
+                }
+                if (backText.isEmpty()) {
+                    backInput.error = "Back side required"
+                    return null
+                }
+                flashcards.add(Flashcard(frontText, backText))
+            }
+
+            if (flashcards.isEmpty()) {
+                Toast.makeText(this, "Add at least one card", Toast.LENGTH_SHORT).show()
+                return null
+            }
+
+            return Deck(deckName, flashcards)
+        }
+
+        btnCreateFinal.setOnClickListener {
+            val newDeck = validateAndGetDeck()
+            if (newDeck != null) {
+                DeckManager.savedDecks.add(newDeck)
+                Toast.makeText(this, "Deck '${newDeck.name}' saved!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, DeckListActivity::class.java))
+                finish()
             }
         }
 
         btnCreatePractice.setOnClickListener {
-            Toast.makeText(this, "Starting practice session...", Toast.LENGTH_SHORT).show()
+            val newDeck = validateAndGetDeck()
+            if (newDeck != null) {
+                // For now, just save and go to list. Could implement practice mode later.
+                DeckManager.savedDecks.add(newDeck)
+                startActivity(Intent(this, DeckListActivity::class.java))
+                finish()
+            }
         }
 
-        // Handle Bottom Navigation clicks
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> {
-                    startActivity(Intent(this, SecondActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_lessons -> {
-                    startActivity(Intent(this, LessonListActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_quiz -> {
-                    startActivity(Intent(this, QuizModeActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_alphabet -> {
-                    startActivity(Intent(this, BasicAlphabetActivity::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_decks -> true // Already here
+                R.id.nav_home -> { startActivity(Intent(this, SecondActivity::class.java)); finish(); true }
+                R.id.nav_lessons -> { startActivity(Intent(this, LessonListActivity::class.java)); finish(); true }
+                R.id.nav_quiz -> { startActivity(Intent(this, QuizModeActivity::class.java)); finish(); true }
+                R.id.nav_alphabet -> { startActivity(Intent(this, BasicAlphabetActivity::class.java)); finish(); true }
+                R.id.nav_decks -> true
                 else -> false
             }
         }

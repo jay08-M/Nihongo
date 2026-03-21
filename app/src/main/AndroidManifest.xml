@@ -38,6 +38,33 @@
         <activity
             android:name=".QuizModeActivity"
             android:exported="false" />
+        <activity
+            android:name=".HiraganaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KatakanaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KanjiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewDeckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizSelectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizDeckSelectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MultipleChoiceQuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IdentificationQuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizResultActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

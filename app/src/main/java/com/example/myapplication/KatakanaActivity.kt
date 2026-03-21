@@ -2,23 +2,16 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class QuizModeActivity : AppCompatActivity() {
+class KatakanaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz_mode)
-
-        // Setup Start Quiz Button
-        findViewById<Button>(R.id.btnStartQuiz).setOnClickListener {
-            val intent = Intent(this, QuizSelectionActivity::class.java)
-            startActivity(intent)
-        }
+        setContentView(R.layout.activity_katakana)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        bottomNavigation.selectedItemId = R.id.nav_quiz
+        bottomNavigation.selectedItemId = R.id.nav_alphabet
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -32,7 +25,11 @@ class QuizModeActivity : AppCompatActivity() {
                     finish()
                     true
                 }
-                R.id.nav_quiz -> true // Already here
+                R.id.nav_quiz -> {
+                    startActivity(Intent(this, QuizModeActivity::class.java))
+                    finish()
+                    true
+                }
                 R.id.nav_alphabet -> {
                     startActivity(Intent(this, BasicAlphabetActivity::class.java))
                     finish()
