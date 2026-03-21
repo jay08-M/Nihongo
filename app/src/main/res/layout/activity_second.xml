@@ -4,637 +4,365 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/books"
+    android:background="#1A1A1A"
+    android:padding="20dp"
     tools:context=".SecondActivity">
 
+    <!-- Header Area -->
     <TextView
-        android:id="@+id/dashboardTitle"
+        android:id="@+id/stylizedNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/transparent_blurred_rectangle"
-        android:fontFamily="serif"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:text="学習 Dashboard"
-        android:textColor="@color/black"
-        android:textSize="28sp"
+        android:text="学習"
+        android:textColor="#3E6868"
+        android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:includeFontPadding="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="322dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/transparent_blurred_rectangle"
-        app:iconifiedByDefault="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardTitle"
-        app:queryBackground="@android:color/transparent"
-        app:queryHint="Search..." />
+    <TextView
+        android:id="@+id/inspirationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="Dashboard"
+        android:textColor="#5E5E5E"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/stylizedNumber"
+        app:layout_constraintTop_toTopOf="@id/stylizedNumber" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        android:scrollbars="vertical"
-        android:fadeScrollbars="false"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Study Progress"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/inspirationLabel"
+        app:layout_constraintTop_toBottomOf="@id/inspirationLabel" />
+
+    <TextView
+        android:id="@+id/referenceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="CORE\nLEVEL"
+        android:textColor="#C94E44"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView">
+        app:layout_constraintTop_toTopOf="@id/inspirationLabel" />
+
+    <!-- Teal Hero Banner: My Flashcard Decks -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tealHeroBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/teal_rounded_bg"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/stylizedNumber">
+
+        <TextView
+            android:id="@+id/decksTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flashcard Decks"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Decks"
+            android:textColor="#1A1A1A"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/deckList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            android:padding="8dp">
+            app:layout_constraintTop_toBottomOf="@id/decksTitle">
 
-            <!-- Automatic Slideshow Container -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#80FFFFFF">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPagerSlideshow"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <GridLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alignmentMode="alignMargins"
-                android:columnCount="2">
-
-                <!-- Card 1: Create Flashcards -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardCreateFlashcard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#80FFFFFF"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <FrameLayout
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:background="@drawable/orange_gradient_bg"
-                            android:padding="12dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/ic_flashcard"
-                                app:tint="@color/white" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:gravity="center"
-                            android:text="Create\nFlashcards"
-                            android:textColor="#212121"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center"
-                            android:text="Build custom decks"
-                            android:textColor="#212121"
-                            android:textSize="12sp" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btnCreateFlashcard"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@drawable/blue_purple_gradient_bg"
-                            android:text="Design"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Card 2: Lesson List -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardLessonList"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#80FFFFFF"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <FrameLayout
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:background="@drawable/green_gradient_bg"
-                            android:padding="12dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/ic_lesson"
-                                app:tint="@color/white" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:gravity="center"
-                            android:text="Lesson\nList"
-                            android:textColor="#212121"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center"
-                            android:text="Access lessons"
-                            android:textColor="#212121"
-                            android:textSize="12sp" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btnLessonList"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@drawable/blue_purple_gradient_bg"
-                            android:text="View"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Card 3: Quiz Mode -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardQuizMode"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#80FFFFFF"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <FrameLayout
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:background="@drawable/purple_gradient_bg"
-                            android:padding="12dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/ic_quiz"
-                                app:tint="@color/white" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:gravity="center"
-                            android:text="Quiz\nMode"
-                            android:textColor="#212121"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center"
-                            android:text="Test knowledge"
-                            android:textColor="#212121"
-                            android:textSize="12sp" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btnQuizMode"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@drawable/blue_purple_gradient_bg"
-                            android:text="Start"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Card 4: Basic Alphabet -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardBasicAlphabet"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#80FFFFFF"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <FrameLayout
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:background="@drawable/teal_gradient_bg"
-                            android:padding="12dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_alphabet"
-                            app:tint="@color/white" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:gravity="center"
-                            android:text="Basic\nAlphabet"
-                            android:textColor="#212121"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:gravity="center"
-                            android:text="Master ABCs"
-                            android:textColor="#212121"
-                            android:textSize="12sp" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btnBasicAlphabet"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@drawable/blue_purple_gradient_bg"
-                            android:text="Practice"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </GridLayout>
-
-            <!-- Flashcard Decks Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/transparent_blurred_rectangle"
-                android:fontFamily="serif"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="My Flashcard Decks"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Deck 1 -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardBackgroundColor="#80FFFFFF"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:id="@+id/deckTitle1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Common Phrases"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/openButton1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/cardCount1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="24 Cards"
-                            android:textColor="#212121"
-                            android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/deckTitle1" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/openButton1"
-                            android:layout_width="80dp"
-                            android:layout_height="36dp"
-                            android:background="@drawable/blue_purple_gradient_bg"
-                            android:text="Open"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Deck 2 -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardBackgroundColor="#80FFFFFF"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:id="@+id/deckTitle2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="JLPT N5 Vocabulary"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/openButton2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/cardCount2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="50 Cards"
-                            android:textColor="#212121"
-                            android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/deckTitle2" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/openButton2"
-                            android:layout_width="80dp"
-                            android:layout_height="36dp"
-                            android:background="@drawable/blue_purple_gradient_bg"
-                            android:text="Open"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Show All Flashcard Decks Button -->
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/showAllDecks"
+                android:layout_marginBottom="12dp">
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/blue_purple_gradient_bg"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="24dp"
-                    android:text="Show All"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Common Phrases"
+                    android:textColor="#1A1A1A"
                     android:textStyle="bold" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/openButton1"
+                    android:layout_width="60dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/button_radius_8"
+                    android:text="Open"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+            </RelativeLayout>
 
-            </LinearLayout>
-
-            <!-- Recent Quiz Results Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/transparent_blurred_rectangle"
-                android:fontFamily="serif"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="Recent Quiz Results"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <!-- Quiz Result 1 -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardBackgroundColor="#80FFFFFF"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:id="@+id/quizTitle1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Hiragana Basics"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/viewButton1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/score1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Score: 18/20"
-                            android:textColor="#212121"
-                            android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/quizTitle1" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/viewButton1"
-                            android:layout_width="80dp"
-                            android:layout_height="36dp"
-                            android:background="@drawable/blue_purple_gradient_bg"
-                            android:text="View"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Quiz Result 2 -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    app:cardBackgroundColor="#80FFFFFF"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:id="@+id/quizTitle2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Verb Conjugation"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/viewButton2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/score2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Score: 15/20"
-                            android:textColor="#212121"
-                            android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/quizTitle2" />
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/viewButton2"
-                            android:layout_width="80dp"
-                            android:layout_height="36dp"
-                            android:background="@drawable/blue_purple_gradient_bg"
-                            android:text="View"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Show All Quiz Results Button -->
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/showAllQuizzes"
+                android:layout_marginBottom="8dp">
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/blue_purple_gradient_bg"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="24dp"
-                    android:text="Show All"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="JLPT N5 Vocabulary"
+                    android:textColor="#1A1A1A"
                     android:textStyle="bold" />
-
-            </LinearLayout>
-
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/openButton2"
+                    android:layout_width="60dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/button_radius_8"
+                    android:text="Open"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+            </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+
+        <TextView
+            android:id="@+id/showAllDecks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Show All"
+            android:textColor="#1A1A1A"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/deckList" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Content Grid -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tealHeroBanner">
+
+        <!-- Left Column -->
+        <LinearLayout
+            android:id="@+id/paletteColumn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/posterCard"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- Red Box: Quiz Results -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/red_rounded_bg"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QUIZ RESULTS"
+                    android:textColor="#1A1A1A"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Hiragana Basics"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/viewButton1"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/button_radius_8"
+                    android:text="View Score"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Katakana Intro"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/viewButton2"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/button_radius_8"
+                    android:text="View Score"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Tan Box: Study Tools -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/tan_rounded_bg"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TOOLS"
+                    android:textColor="#1A1A1A"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnQuizMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/button_radius_8"
+                    android:drawableTop="@drawable/ic_quiz"
+                    android:drawablePadding="2dp"
+                    android:paddingTop="4dp"
+                    android:gravity="center"
+                    android:text="Quiz Mode"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCreateFlashcard"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/button_radius_8"
+                    android:drawableTop="@drawable/ic_flashcard"
+                    android:drawablePadding="2dp"
+                    android:paddingTop="4dp"
+                    android:gravity="center"
+                    android:text="Create Cards"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnBasicAlphabet"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/button_radius_8"
+                    android:drawableTop="@drawable/ic_alphabet"
+                    android:drawablePadding="2dp"
+                    android:paddingTop="4dp"
+                    android:gravity="center"
+                    android:text="Alphabet"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Right Column: Poster Card (Lesson List) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/posterCard"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1.2"
+            app:layout_constraintStart_toEndOf="@id/paletteColumn"
+            app:strokeColor="#C1AB85"
+            app:strokeWidth="2dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/books" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#801A1A1A" />
+
+                <TextView
+                    android:id="@+id/lessonHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="LESSON LIST"
+                    android:textColor="#C1AB85"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLessonList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/tan_rounded_bg"
+                    android:paddingHorizontal="16dp"
+                    android:text="View All"
+                    android:textAllCaps="false"
+                    android:textColor="#1A1A1A"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

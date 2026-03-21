@@ -1,70 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardBackgroundColor="#80FFFFFF"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="0dp">
+    android:orientation="vertical"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/transparent_blurred_edittext"
+    android:padding="12dp">
 
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Front Side"
+        android:textColor="#5E5E5E"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp"/>
+
+    <EditText
+        android:id="@+id/cardFrontInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:background="@null"
+        android:hint="Enter term..."
+        android:textColor="#FFFFFF"
+        android:textColorHint="#5E5E5E"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
 
-        <!-- Term Section -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            android:orientation="horizontal">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#40FFFFFF"
+        android:layout_marginBottom="8dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Term"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back Side"
+        android:textColor="#5E5E5E"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp"/>
 
-            <EditText
-                android:id="@+id/termInput"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/transparent_blurred_edittext"
-                android:gravity="top"
-                android:hint="Enter Term"
-                android:padding="12dp"
-                android:textColor="@color/white"
-                android:textColorHint="#B0FFFFFF"
-                android:inputType="textMultiLine" />
-        </LinearLayout>
+    <EditText
+        android:id="@+id/cardBackInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="Enter definition..."
+        android:textColor="#FFFFFF"
+        android:textColorHint="#5E5E5E"
+        android:textSize="16sp" />
 
-        <!-- Definition Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Definition"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/definitionInput"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/transparent_blurred_edittext"
-            android:hint="Enter Definitions"
-            android:padding="12dp"
-            android:textColor="@color/white"
-            android:textColorHint="#B0FFFFFF"
-            android:inputType="text" />
-
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</LinearLayout>

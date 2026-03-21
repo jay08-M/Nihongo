@@ -4,33 +4,219 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/books"
+    android:background="#1A1A1A"
+    android:padding="20dp"
     tools:context=".LessonListActivity">
 
+    <!-- Header Area -->
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/stylizedNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/transparent_blurred_rectangle"
-        android:fontFamily="serif"
-        android:padding="12dp"
-        android:text="Lesson List"
-        android:textColor="@color/black"
-        android:textSize="24sp"
+        android:includeFontPadding="false"
+        android:text="学習"
+        android:textColor="#3E6868"
+        android:textSize="60sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/inspirationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="Lessons"
+        android:textColor="#5E5E5E"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/stylizedNumber"
+        app:layout_constraintTop_toTopOf="@id/stylizedNumber" />
+
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lesson List"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/inspirationLabel"
+        app:layout_constraintTop_toBottomOf="@id/inspirationLabel" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintTop_toBottomOf="@id/stylizedNumber">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Continue your learning journey:"
+                android:textColor="#5E5E5E"
+                android:textSize="14sp" />
+
+            <!-- Lesson Item 1 (Teal style) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/teal_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/lesson1Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lesson 1: Greetings"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Learn basic greetings and introductions."
+                    android:textColor="#1A1A1A"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lesson1Title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartLesson1"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/button_radius_8"
+                    android:text="STUDY"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Lesson Item 2 (Tan style) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/tan_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/lesson2Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lesson 2: Numbers"
+                    android:textColor="#1A1A1A"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Master counting from 1 to 100."
+                    android:textColor="#5E5E5E"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lesson2Title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartLesson2"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/button_radius_8"
+                    android:text="STUDY"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Lesson Item 3 (Red style) -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/red_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/lesson3Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lesson 3: Particles"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Introduction to wa, ga, and o particles."
+                    android:textColor="#1A1A1A"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lesson3Title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartLesson3"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/button_radius_8"
+                    android:text="STUDY"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#CCFFFFFF"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        android:layout_height="wrap_content"
+        android:background="#1A1A1A"
+        app:itemIconTint="#C1AB85"
+        app:itemTextColor="#C1AB85"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

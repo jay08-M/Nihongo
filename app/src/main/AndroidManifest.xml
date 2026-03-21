@@ -27,6 +27,9 @@
             android:name=".CreateFlashcardActivity"
             android:exported="false" />
         <activity
+            android:name=".DeckListActivity"
+            android:exported="false" />
+        <activity
             android:name=".BasicAlphabetActivity"
             android:exported="false" />
         <activity
@@ -35,6 +38,10 @@
         <activity
             android:name=".QuizModeActivity"
             android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

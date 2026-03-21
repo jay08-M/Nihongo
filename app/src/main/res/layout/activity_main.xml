@@ -5,63 +5,138 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pig"
+    android:background="@drawable/gg"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextText3"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="146dp"
+        android:layout_height="157dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
-        app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/gemini_generated_image_7dnmiy7dnmiy7dnm_removebg_preview" />
 
-    <EditText
-        android:id="@+id/editTextText3"
-        android:layout_width="300dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/transparent_blurred_edittext"
-        android:ems="10"
-        android:hint="Enter Name"
-        android:inputType="text"
-        android:padding="16dp"
-        android:textColor="@color/white"
-        android:textColorHint="#B0FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="220dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#800000"
-        android:text="Get Started"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
-
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Flash Your Way to Nihongo"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp"
+        android:text=" NihonGo"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.596" />
+
+    <TextView
+        android:id="@+id/japaneseHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="学習"
+        android:textColor="#C1AB85"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/glassBox"
+        app:layout_constraintEnd_toStartOf="@+id/welcomeHeader"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/welcomeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="WELCOME"
+        android:textColor="#C1AB85"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/japaneseHeader"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toEndOf="@+id/japaneseHeader" />
+
+    <!-- Glass Box Centered -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/glassBox"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/transparent_blurred_edittext"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/footerArea"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@id/imageView2"
+        app:layout_constraintVertical_bias="0.5">
+
+        <EditText
+            android:id="@+id/editTextText3"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_bg"
+            android:ems="10"
+            android:hint="Enter Name"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textColorHint="#5E5E5E"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/tan_rounded_bg"
+            android:text="Get Started"
+            android:textAllCaps="false"
+            android:textColor="#1A1A1A"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Flash Your Way to Nihongo"
+            android:textColor="#5E5E5E"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <ImageView
+            android:id="@+id/lifeIsHardImage"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="12dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            app:srcCompat="@drawable/japanese_wallpaper_removebg_preview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Footer Area -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/footerArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
