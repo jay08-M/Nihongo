@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import java.io.Serializable
+import java.util.Date
 
 data class Flashcard(
     val front: String,
@@ -24,7 +25,8 @@ data class QuizResult(
     val totalQuestions: Int,
     val correctAnswers: Int,
     val wrongAnswers: Int,
-    val answersList: List<UserAnswer>
+    val answersList: List<UserAnswer>,
+    val dateTaken: Date = Date()
 ) : Serializable
 
 object DeckManager {

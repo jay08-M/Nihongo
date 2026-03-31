@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class SecondActivity : AppCompatActivity() {
 
@@ -97,64 +99,53 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun updateRecentQuizzes() {
-        val recentQuizzes = DeckManager.quizHistory.takeLast(3).reversed()
+        val recentQuizzes = DeckManager.quizHistory.takeLast(4).reversed()
+        val dateFormat = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault())
         
-        val layout1 = findViewById<View>(R.id.layoutQuiz1)
-        val layout2 = findViewById<View>(R.id.layoutQuiz2)
-        val layout3 = findViewById<View>(R.id.layoutQuiz3)
+        val layouts = listOf(
+            findViewById<View>(R.id.layoutQuiz1),
+            findViewById<View>(R.id.layoutQuiz2),
+            findViewById<View>(R.id.layoutQuiz3),
+            findViewById<View>(R.id.layoutQuiz4)
+        )
+        
+        val tvNames = listOf(
+            findViewById<TextView>(R.id.tvQuizName1),
+            findViewById<TextView>(R.id.tvQuizName2),
+            findViewById<TextView>(R.id.tvQuizName3),
+            findViewById<TextView>(R.id.tvQuizName4)
+        )
+        
+        val tvDetails = listOf(
+            findViewById<TextView>(R.id.tvQuizDetails1),
+            findViewById<TextView>(R.id.tvQuizDetails2),
+            findViewById<TextView>(R.id.tvQuizDetails3),
+            findViewById<TextView>(R.id.tvQuizDetails4)
+        )
+
         val tvNoQuizzes = findViewById<TextView>(R.id.tvNoQuizzes)
 
-        val tvName1 = findViewById<TextView>(R.id.tvQuizName1)
-        val btnView1 = findViewById<Button>(R.id.viewButton1)
-        
-        val tvName2 = findViewById<TextView>(R.id.tvQuizName2)
-        val btnView2 = findViewById<Button>(R.id.viewButton2)
-        
-        val tvName3 = findViewById<TextView>(R.id.tvQuizName3)
-        val btnView3 = findViewById<Button>(R.id.viewButton3)
-
         if (recentQuizzes.isEmpty()) {
-            layout1.visibility = View.GONE
-            layout2.visibility = View.GONE
-            layout3.visibility = View.GONE
+            layouts.forEach { it.visibility = View.GONE }
             tvNoQuizzes.visibility = View.VISIBLE
         } else {
             tvNoQuizzes.visibility = View.GONE
             
-            // Quiz 1
-            layout1.visibility = View.VISIBLE
-            tvName1.text = recentQuizzes[0].deckName
-            btnView1.setOnClickListener {
-                val intent = Intent(this, QuizResultActivity::class.java)
-                intent.putExtra("QUIZ_RESULT", recentQuizzes[0])
-                // Note: We'd need to store the Deck object in QuizResult if we wanted retry to work from here
-                startActivity(intent)
-            }
-            
-            // Quiz 2
-            if (recentQuizzes.size > 1) {
-                layout2.visibility = View.VISIBLE
-                tvName2.text = recentQuizzes[1].deckName
-                btnView2.setOnClickListener {
-                    val intent = Intent(this, QuizResultActivity::class.java)
-                    intent.putExtra("QUIZ_RESULT", recentQuizzes[1])
-                    startActivity(intent)
+            for (i in layouts.indices) {
+                if (i < recentQuizzes.size) {
+                    val quiz = recentQuizzes[i]
+                    layouts[i].visibility = View.VISIBLE
+                    tvNames[i].text = quiz.deckName
+                    tvDetails[i].text = "Score: ${quiz.correctAnswers}/${quiz.totalQuestions} | ${dateFormat.format(quiz.dateTaken)}"
+                    
+                    layouts[i].setOnClickListener {
+                        val intent = Intent(this, QuizResultActivity::class.java)
+                        intent.putExtra("QUIZ_RESULT", quiz)
+                        startActivity(intent)
+                    }
+                } else {
+                    layouts[i].visibility = View.GONE
                 }
-            } else {
-                layout2.visibility = View.GONE
-            }
-
-            // Quiz 3
-            if (recentQuizzes.size > 2) {
-                layout3.visibility = View.VISIBLE
-                tvName3.text = recentQuizzes[2].deckName
-                btnView3.setOnClickListener {
-                    val intent = Intent(this, QuizResultActivity::class.java)
-                    intent.putExtra("QUIZ_RESULT", recentQuizzes[2])
-                    startActivity(intent)
-                }
-            } else {
-                layout3.visibility = View.GONE
             }
         }
     }

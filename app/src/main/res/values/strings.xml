@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="stylized_study">学習</string>
+    <string name="label_dashboard">Dashboard</string>
+    <string name="title_study_progress">Study Progress</string>
+    <string name="label_core_level">CORE\nLEVEL</string>
+    <string name="title_flashcard_decks">Flashcard Decks</string>
+    <string name="label_decks">Decks</string>
+    <string name="msg_no_recent_decks">No recent decks</string>
+    <string name="default_deck_name_1">Common Phrases</string>
+    <string name="btn_open">Open</string>
+    <string name="default_deck_name_2">JLPT N5 Vocabulary</string>
+    <string name="label_show_all">Show All</string>
+    <string name="header_quiz_results">QUIZ RESULTS</string>
+    <string name="msg_no_recent_quizzes">No recent quizzes</string>
+    <string name="header_tools">TOOLS</string>
+    <string name="btn_quiz_mode">Quiz Mode</string>
+    <string name="btn_create_cards">Create Cards</string>
+    <string name="btn_alphabet">Alphabet</string>
+    <string name="header_lesson_list">LESSON LIST</string>
+    <string name="btn_view_all">View All</string>
 </resources>
