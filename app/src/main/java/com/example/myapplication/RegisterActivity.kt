@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -16,12 +15,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        
+        setContentView(R.layout.activity_register)
+
         val mainView = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.main)
         ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -35,37 +34,40 @@ class MainActivity : AppCompatActivity() {
             imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
 
-        val etUsername = findViewById<EditText>(R.id.etUsername)
-        val etPassword = findViewById<EditText>(R.id.etPassword)
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        val tvRegister = findViewById<TextView>(R.id.tvRegister)
+        val etUsername = findViewById<EditText>(R.id.etRegUsername)
+        val etPassword = findViewById<EditText>(R.id.etRegPassword)
+        val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
+        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val tvBackToLogin = findViewById<TextView>(R.id.tvBackToLogin)
 
-        btnLogin.setOnClickListener {
+        btnRegister.setOnClickListener {
             val username = etUsername.text.toString().trim()
             val password = etPassword.text.toString().trim()
-            
-            if (username.isNotEmpty() && password.isNotEmpty()) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val isAuthenticated = DatabaseHelper.authenticateUser(username, password)
-                    withContext(Dispatchers.Main) {
-                        if (isAuthenticated) {
-                            val intent = Intent(this@MainActivity, SecondActivity::class.java)
-                            intent.putExtra("USER_NAME", username)
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            Toast.makeText(this@MainActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
+            val confirmPassword = etConfirmPassword.text.toString().trim()
+
+            if (username.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+                if (password == confirmPassword) {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val isRegistered = DatabaseHelper.registerUser(username, password)
+                        withContext(Dispatchers.Main) {
+                            if (isRegistered) {
+                                Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
+                                finish()
+                            } else {
+                                Toast.makeText(this@RegisterActivity, "Registration failed", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
+                } else {
+                    Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
 
-        tvRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+        tvBackToLogin.setOnClickListener {
+            finish()
         }
     }
 }

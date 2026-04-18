@@ -189,10 +189,6 @@
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent">
 
-            <!-- Red Box: Quiz Results -->
-
-            <!-- Tan Box: Study Tools -->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
