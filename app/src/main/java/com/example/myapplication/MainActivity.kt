@@ -11,16 +11,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var dbHelper: DatabaseHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        
+        dbHelper = DatabaseHelper(this)
+        
+        // This will print all existing users to the Logcat tab immediately
+        dbHelper.logAllUsers()
         
         val mainView = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.main)
         ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
@@ -29,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Hide keyboard when background is clicked
         mainView.setOnClickListener {
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
@@ -45,18 +47,15 @@ class MainActivity : AppCompatActivity() {
             val password = etPassword.text.toString().trim()
             
             if (username.isNotEmpty() && password.isNotEmpty()) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val isAuthenticated = DatabaseHelper.authenticateUser(username, password)
-                    withContext(Dispatchers.Main) {
-                        if (isAuthenticated) {
-                            val intent = Intent(this@MainActivity, SecondActivity::class.java)
-                            intent.putExtra("USER_NAME", username)
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            Toast.makeText(this@MainActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
-                        }
-                    }
+                val userId = dbHelper.authenticateUser(username, password)
+                if (userId != -1) {
+                    val intent = Intent(this@MainActivity, SecondActivity::class.java)
+                    intent.putExtra("USER_NAME", username)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this@MainActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()

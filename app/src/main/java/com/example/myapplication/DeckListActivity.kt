@@ -13,10 +13,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class DeckListActivity : AppCompatActivity() {
     
     private lateinit var adapter: DeckListAdapter
+    private lateinit var dbHelper: DatabaseHelper
+    private var userId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deck_list)
+
+        dbHelper = DatabaseHelper(this)
+        userId = intent.getIntExtra("USER_ID", -1)
 
         val rvDeckList = findViewById<RecyclerView>(R.id.rvDeckList)
         val btnAddDeck = findViewById<Button>(R.id.btnAddDeck)
@@ -29,6 +34,7 @@ class DeckListActivity : AppCompatActivity() {
             onViewClick = { deck -> 
                 val intent = Intent(this, ViewDeckActivity::class.java)
                 intent.putExtra("DECK_DATA", deck)
+                intent.putExtra("USER_ID", userId)
                 startActivity(intent)
             },
             onDeleteClick = { deck -> confirmDelete(deck) }
@@ -38,15 +44,41 @@ class DeckListActivity : AppCompatActivity() {
         rvDeckList.adapter = adapter
 
         btnAddDeck.setOnClickListener {
-            startActivity(Intent(this, CreateFlashcardActivity::class.java))
+            val intent = Intent(this, CreateFlashcardActivity::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent)
         }
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> { startActivity(Intent(this, SecondActivity::class.java)); finish(); true }
-                R.id.nav_lessons -> { startActivity(Intent(this, LessonListActivity::class.java)); finish(); true }
-                R.id.nav_quiz -> { startActivity(Intent(this, QuizModeActivity::class.java)); finish(); true }
-                R.id.nav_alphabet -> { startActivity(Intent(this, BasicAlphabetActivity::class.java)); finish(); true }
+                R.id.nav_home -> { 
+                    val intent = Intent(this, SecondActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true 
+                }
+                R.id.nav_lessons -> { 
+                    val intent = Intent(this, LessonListActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true 
+                }
+                R.id.nav_quiz -> { 
+                    val intent = Intent(this, QuizModeActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true 
+                }
+                R.id.nav_alphabet -> { 
+                    val intent = Intent(this, BasicAlphabetActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true 
+                }
                 R.id.nav_decks -> true
                 else -> false
             }
@@ -58,9 +90,14 @@ class DeckListActivity : AppCompatActivity() {
             .setTitle("Delete Deck")
             .setMessage("Are you sure you want to delete '${deck.name}'?")
             .setPositiveButton("Delete") { _, _ ->
-                DeckManager.savedDecks.remove(deck)
-                adapter.notifyDataSetChanged()
-                Toast.makeText(this, "Deck deleted", Toast.LENGTH_SHORT).show()
+                val success = dbHelper.deleteDeck(deck.id)
+                if (success) {
+                    DeckManager.savedDecks.remove(deck)
+                    adapter.notifyDataSetChanged()
+                    Toast.makeText(this, "Deck deleted from database", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Failed to delete from database", Toast.LENGTH_SHORT).show()
+                }
             }
             .setNegativeButton("Cancel", null)
             .show()

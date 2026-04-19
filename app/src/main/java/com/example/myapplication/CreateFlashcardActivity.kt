@@ -13,9 +13,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CreateFlashcardActivity : AppCompatActivity() {
+    private lateinit var dbHelper: DatabaseHelper
+    private var userId: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_flashcard)
+
+        dbHelper = DatabaseHelper(this)
+        userId = intent.getIntExtra("USER_ID", -1)
 
         val deckNameInput = findViewById<EditText>(R.id.deckNameInput)
         val flashcardListContainer = findViewById<LinearLayout>(R.id.flashcardListContainer)
@@ -55,14 +61,14 @@ class CreateFlashcardActivity : AppCompatActivity() {
             addNewCardItem()
         }
 
-        fun validateAndGetDeck(): Deck? {
+        fun saveDeckToDatabase(): Deck? {
             val deckName = deckNameInput.text.toString().trim()
             if (deckName.isEmpty()) {
                 deckNameInput.error = "Deck name is required"
                 return null
             }
 
-            val flashcards = mutableListOf<Flashcard>()
+            val flashcardInputs = mutableListOf<Pair<String, String>>()
             for (i in 0 until flashcardListContainer.childCount) {
                 val cardView = flashcardListContainer.getChildAt(i)
                 val frontInput = cardView.findViewById<EditText>(R.id.cardFrontInput)
@@ -79,42 +85,84 @@ class CreateFlashcardActivity : AppCompatActivity() {
                     backInput.error = "Back side required"
                     return null
                 }
-                flashcards.add(Flashcard(frontText, backText))
+                flashcardInputs.add(Pair(frontText, backText))
             }
 
-            if (flashcards.isEmpty()) {
+            if (flashcardInputs.isEmpty()) {
                 Toast.makeText(this, "Add at least one card", Toast.LENGTH_SHORT).show()
                 return null
             }
 
-            return Deck(deckName, flashcards)
+            // Save to DB
+            val deckId = dbHelper.addDeck(userId, deckName)
+            if (deckId == -1L) {
+                Toast.makeText(this, "Failed to create deck in database", Toast.LENGTH_SHORT).show()
+                return null
+            }
+
+            val flashcards = mutableListOf<Flashcard>()
+            for (input in flashcardInputs) {
+                val cardId = dbHelper.addFlashcard(deckId.toInt(), input.first, input.second)
+                flashcards.add(Flashcard(id = cardId.toInt(), deckId = deckId.toInt(), front = input.first, back = input.second))
+            }
+
+            val newDeck = Deck(id = deckId.toInt(), userId = userId, name = deckName, cards = flashcards.toMutableList())
+            // Also add to the in-memory list for immediate display
+            DeckManager.savedDecks.add(newDeck)
+            return newDeck
         }
 
         btnCreateFinal.setOnClickListener {
-            val newDeck = validateAndGetDeck()
+            val newDeck = saveDeckToDatabase()
             if (newDeck != null) {
-                DeckManager.savedDecks.add(newDeck)
                 Toast.makeText(this, "Deck '${newDeck.name}' saved!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, DeckListActivity::class.java))
+                val intent = Intent(this, DeckListActivity::class.java)
+                intent.putExtra("USER_ID", userId)
+                startActivity(intent)
                 finish()
             }
         }
 
         btnCreatePractice.setOnClickListener {
-            val newDeck = validateAndGetDeck()
+            val newDeck = saveDeckToDatabase()
             if (newDeck != null) {
-                DeckManager.savedDecks.add(newDeck)
-                startActivity(Intent(this, DeckListActivity::class.java))
+                val intent = Intent(this, DeckListActivity::class.java)
+                intent.putExtra("USER_ID", userId)
+                startActivity(intent)
                 finish()
             }
         }
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> { startActivity(Intent(this, SecondActivity::class.java)); finish(); true }
-                R.id.nav_lessons -> { startActivity(Intent(this, LessonListActivity::class.java)); finish(); true }
-                R.id.nav_quiz -> { startActivity(Intent(this, QuizModeActivity::class.java)); finish(); true }
-                R.id.nav_alphabet -> { startActivity(Intent(this, BasicAlphabetActivity::class.java)); finish(); true }
+                R.id.nav_home -> { 
+                    val intent = Intent(this, SecondActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true 
+                }
+                R.id.nav_lessons -> { 
+                    val intent = Intent(this, LessonListActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true 
+                }
+                R.id.nav_quiz -> { 
+                    val intent = Intent(this, QuizModeActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true 
+                }
+                R.id.nav_alphabet -> { 
+                    val intent = Intent(this, BasicAlphabetActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true 
+                }
                 R.id.nav_decks -> true
                 else -> false
             }

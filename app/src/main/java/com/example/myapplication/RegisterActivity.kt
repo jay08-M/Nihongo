@@ -10,16 +10,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class RegisterActivity : AppCompatActivity() {
+    private lateinit var dbHelper: DatabaseHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
+
+        dbHelper = DatabaseHelper(this)
 
         val mainView = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.main)
         ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
@@ -28,7 +28,6 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
 
-        // Hide keyboard when background is clicked
         mainView.setOnClickListener {
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
@@ -47,16 +46,12 @@ class RegisterActivity : AppCompatActivity() {
 
             if (username.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
                 if (password == confirmPassword) {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        val isRegistered = DatabaseHelper.registerUser(username, password)
-                        withContext(Dispatchers.Main) {
-                            if (isRegistered) {
-                                Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
-                                finish()
-                            } else {
-                                Toast.makeText(this@RegisterActivity, "Registration failed", Toast.LENGTH_SHORT).show()
-                            }
-                        }
+                    val success = dbHelper.registerUser(username, password)
+                    if (success) {
+                        Toast.makeText(this, "Registered!", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()

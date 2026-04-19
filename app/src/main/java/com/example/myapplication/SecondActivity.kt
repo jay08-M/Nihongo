@@ -5,53 +5,81 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class SecondActivity : AppCompatActivity() {
+    private var userId: Int = -1
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        // --- Navigation Intents ---
-        val createIntent = Intent(this, CreateFlashcardActivity::class.java)
-        val deckListIntent = Intent(this, DeckListActivity::class.java)
-        val alphabetIntent = Intent(this, BasicAlphabetActivity::class.java)
-        val lessonIntent = Intent(this, LessonListActivity::class.java)
-        val quizIntent = Intent(this, QuizModeActivity::class.java)
+        dbHelper = DatabaseHelper(this)
+        userId = intent.getIntExtra("USER_ID", -1)
 
-        // --- Button Click Listeners (Tools Section) ---
+        // --- Navigation Intents ---
         
         // Flashcard Section
-        findViewById<Button>(R.id.btnCreateFlashcard).setOnClickListener { startActivity(createIntent) }
+        findViewById<Button>(R.id.btnCreateFlashcard).setOnClickListener { 
+            val intent = Intent(this, CreateFlashcardActivity::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent) 
+        }
 
         // "Show All" TextView in Flashcard Section
         findViewById<TextView>(R.id.showAllDecks).setOnClickListener { 
-            startActivity(deckListIntent) 
+            val intent = Intent(this, DeckListActivity::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent) 
         }
 
         // Alphabet Button
         findViewById<Button>(R.id.btnBasicAlphabet).setOnClickListener { 
-            startActivity(alphabetIntent) 
+            val intent = Intent(this, BasicAlphabetActivity::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent) 
         }
 
         // Lesson Section
-        findViewById<Button>(R.id.btnLessonList).setOnClickListener { startActivity(lessonIntent) }
+        findViewById<Button>(R.id.btnLessonList).setOnClickListener { 
+            val intent = Intent(this, LessonListActivity::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent) 
+        }
         
         // Quiz Section
-        findViewById<Button>(R.id.btnQuizMode).setOnClickListener { startActivity(quizIntent) }
+        findViewById<Button>(R.id.btnQuizMode).setOnClickListener { 
+            val intent = Intent(this, QuizModeActivity::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent) 
+        }
         
+        loadDecksFromDb()
         updateRecentDecks()
         updateRecentQuizzes()
     }
 
     override fun onResume() {
         super.onResume()
+        loadDecksFromDb()
         updateRecentDecks()
         updateRecentQuizzes()
+    }
+
+    private fun loadDecksFromDb() {
+        if (userId != -1) {
+            val decks = dbHelper.getDecksForUser(userId)
+            DeckManager.savedDecks.clear()
+            for (deck in decks) {
+                val cards = dbHelper.getFlashcardsForDeck(deck.id)
+                deck.cards.clear()
+                deck.cards.addAll(cards)
+                DeckManager.savedDecks.add(deck)
+            }
+        }
     }
 
     private fun updateRecentDecks() {
@@ -79,7 +107,7 @@ class SecondActivity : AppCompatActivity() {
             tvName1.text = recentDecks[0].name
             btnOpen1.setOnClickListener {
                 val intent = Intent(this, ViewDeckActivity::class.java)
-                intent.putExtra("SELECTED_DECK", recentDecks[0])
+                intent.putExtra("DECK_DATA", recentDecks[0])
                 startActivity(intent)
             }
             
@@ -89,7 +117,7 @@ class SecondActivity : AppCompatActivity() {
                 tvName2.text = recentDecks[1].name
                 btnOpen2.setOnClickListener {
                     val intent = Intent(this, ViewDeckActivity::class.java)
-                    intent.putExtra("SELECTED_DECK", recentDecks[1])
+                    intent.putExtra("DECK_DATA", recentDecks[1])
                     startActivity(intent)
                 }
             } else {

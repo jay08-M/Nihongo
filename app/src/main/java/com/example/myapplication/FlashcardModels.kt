@@ -3,14 +3,23 @@ package com.example.myapplication
 import java.io.Serializable
 import java.util.Date
 
+data class User(
+    val id: Int,
+    val username: String
+) : Serializable
+
 data class Flashcard(
+    val id: Int = -1,
+    val deckId: Int = -1,
     val front: String,
     val back: String
 ) : Serializable
 
 data class Deck(
+    val id: Int = -1,
+    val userId: Int = -1,
     val name: String,
-    val cards: List<Flashcard>
+    val cards: MutableList<Flashcard> = mutableListOf()
 ) : Serializable
 
 data class UserAnswer(
