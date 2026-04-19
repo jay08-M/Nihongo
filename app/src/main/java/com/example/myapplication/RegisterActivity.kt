@@ -45,6 +45,12 @@ class RegisterActivity : AppCompatActivity() {
             val confirmPassword = etConfirmPassword.text.toString().trim()
 
             if (username.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+                if (password.length < 12 || password.length > 16) {
+                    etPassword.error = "Password must be 12-16 characters"
+                    Toast.makeText(this, "Password must be between 12 and 16 characters", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 if (password == confirmPassword) {
                     val success = dbHelper.registerUser(username, password)
                     if (success) {
