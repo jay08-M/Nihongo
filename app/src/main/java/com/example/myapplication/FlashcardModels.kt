@@ -18,7 +18,7 @@ data class Flashcard(
 data class Deck(
     val id: Int = -1,
     val userId: Int = -1,
-    val name: String,
+    var name: String,
     val cards: MutableList<Flashcard> = mutableListOf()
 ) : Serializable
 

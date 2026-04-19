@@ -37,6 +37,12 @@ class DeckListActivity : AppCompatActivity() {
                 intent.putExtra("USER_ID", userId)
                 startActivity(intent)
             },
+            onEditClick = { deck ->
+                val intent = Intent(this, EditDeckActivity::class.java)
+                intent.putExtra("DECK_ID", deck.id)
+                intent.putExtra("USER_ID", userId)
+                startActivity(intent)
+            },
             onDeleteClick = { deck -> confirmDelete(deck) }
         )
 
@@ -80,9 +86,22 @@ class DeckListActivity : AppCompatActivity() {
                     true 
                 }
                 R.id.nav_decks -> true
+                R.id.nav_settings -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    intent.putExtra("USER_ID", userId)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
                 else -> false
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh list in case cards were added/edited
+        adapter.notifyDataSetChanged()
     }
 
     private fun confirmDelete(deck: Deck) {

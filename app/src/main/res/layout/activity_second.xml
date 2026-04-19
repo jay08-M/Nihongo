@@ -5,426 +5,469 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1A1A1A"
-    android:padding="20dp"
     tools:context=".SecondActivity">
 
-    <!-- Header Area -->
-    <TextView
-        android:id="@+id/stylizedNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="学習"
-        android:textColor="#3E6868"
-        android:textSize="60sp"
-        android:textStyle="bold"
-        android:includeFontPadding="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/inspirationLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:text="Dashboard"
-        android:textColor="#5E5E5E"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@id/stylizedNumber"
-        app:layout_constraintTop_toTopOf="@id/stylizedNumber" />
-
-    <TextView
-        android:id="@+id/mainTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Study Progress"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/inspirationLabel"
-        app:layout_constraintTop_toBottomOf="@id/inspirationLabel" />
-
-    <TextView
-        android:id="@+id/referenceLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:text="CORE\nLEVEL"
-        android:textColor="#C94E44"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/inspirationLabel" />
-
-    <!-- Teal Hero Banner: My Flashcard Decks -->
+    <!-- Header Area (Outside ScrollView to stay fixed at top) -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tealHeroBanner"
+        android:id="@+id/headerContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/teal_rounded_bg"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/stylizedNumber">
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/decksTitle"
+            android:id="@+id/stylizedNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Flashcard Decks"
-            android:textColor="#FFFFFF"
-            android:textSize="22sp"
+            android:text="学習"
+            android:textColor="#3E6868"
+            android:textSize="50sp"
             android:textStyle="bold"
+            android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/inspirationLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Decks"
-            android:textColor="#1A1A1A"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/deckList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/decksTitle">
-
-            <TextView
-                android:id="@+id/tvNoDecks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No recent decks"
-                android:textColor="#1A1A1A"
-                android:visibility="gone"
-                android:layout_marginBottom="12dp"/>
-
-            <RelativeLayout
-                android:id="@+id/layoutDeck1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp">
-                <TextView
-                    android:id="@+id/tvDeckName1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="Common Phrases"
-                    android:textColor="#1A1A1A"
-                    android:textStyle="bold" />
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/openButton1"
-                    android:layout_width="60dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/button_radius_8"
-                    android:text="Open"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layoutDeck2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
-                <TextView
-                    android:id="@+id/tvDeckName2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="JLPT N5 Vocabulary"
-                    android:textColor="#1A1A1A"
-                    android:textStyle="bold" />
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/openButton2"
-                    android:layout_width="60dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/button_radius_8"
-                    android:text="Open"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-            </RelativeLayout>
-        </LinearLayout>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:text="Dashboard"
+            android:textColor="#5E5E5E"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/stylizedNumber"
+            app:layout_constraintTop_toTopOf="@id/stylizedNumber" />
 
         <TextView
-            android:id="@+id/showAllDecks"
+            android:id="@+id/mainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Show All"
-            android:textColor="#1A1A1A"
+            android:text="Study Progress"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/inspirationLabel"
+            app:layout_constraintTop_toBottomOf="@id/inspirationLabel" />
+
+        <TextView
+            android:id="@+id/referenceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="CORE\nLEVEL"
+            android:textColor="#C94E44"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/btnSettingsTop"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintTop_toTopOf="@id/inspirationLabel" />
+
+        <ImageButton
+            android:id="@+id/btnSettingsTop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_settings"
+            app:tint="#C1AB85"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/deckList" />
+            app:layout_constraintTop_toTopOf="@id/inspirationLabel"
+            app:layout_constraintBottom_toBottomOf="@id/mainTitle"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Content Grid -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contentGrid"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tealHeroBanner">
+        app:layout_constraintTop_toBottomOf="@id/headerContainer">
 
-        <!-- Left Column -->
-        <LinearLayout
-            android:id="@+id/paletteColumn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@+id/posterCard"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toStartOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="20dp">
 
-            <!-- Red Box: Quiz Results -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="1.2"
-                android:background="@drawable/red_rounded_bg"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="QUIZ RESULTS"
-                    android:textColor="#1A1A1A"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvNoQuizzes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="No recent quizzes"
-                    android:textColor="#FFFFFF"
-                    android:visibility="gone" />
-
-                <LinearLayout
-                    android:id="@+id/layoutQuiz1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-                    <TextView
-                        android:id="@+id/tvQuizName1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Quiz 1"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/viewButton1"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/button_radius_8"
-                        android:text="View Result"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="10sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutQuiz2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-                    <TextView
-                        android:id="@+id/tvQuizName2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Quiz 2"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/viewButton2"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/button_radius_8"
-                        android:text="View Result"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="10sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutQuiz3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-                    <TextView
-                        android:id="@+id/tvQuizName3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Quiz 3"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/viewButton3"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="4dp"
-                        android:background="@drawable/button_radius_8"
-                        android:text="View Result"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="10sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <!-- Tan Box: Study Tools -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/tan_rounded_bg"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TOOLS"
-                    android:textColor="#1A1A1A"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnQuizMode"
-                    android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/button_radius_8"
-                    android:drawableTop="@drawable/ic_quiz"
-                    android:drawablePadding="2dp"
-                    android:paddingTop="4dp"
-                    android:gravity="center"
-                    android:text="Quiz Mode"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnCreateFlashcard"
-                    android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/button_radius_8"
-                    android:drawableTop="@drawable/ic_flashcard"
-                    android:drawablePadding="2dp"
-                    android:paddingTop="4dp"
-                    android:gravity="center"
-                    android:text="Create Cards"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnBasicAlphabet"
-                    android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/button_radius_8"
-                    android:drawableTop="@drawable/ic_alphabet"
-                    android:drawablePadding="2dp"
-                    android:paddingTop="4dp"
-                    android:gravity="center"
-                    android:text="Alphabet"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Right Column: Poster Card (Lesson List) -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/posterCard"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1.2"
-            app:layout_constraintStart_toEndOf="@id/paletteColumn"
-            app:strokeColor="#C1AB85"
-            app:strokeWidth="2dp">
-
+            <!-- Teal Hero Banner -->
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tealHeroBanner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/books" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#801A1A1A" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/teal_rounded_bg"
+                android:padding="16dp"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/lessonHeader"
+                    android:id="@+id/decksTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="LESSON LIST"
-                    android:textColor="#C1AB85"
+                    android:text="Flashcard Decks"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLessonList"
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:layout_marginBottom="24dp"
-                    android:background="@drawable/tan_rounded_bg"
-                    android:paddingHorizontal="16dp"
-                    android:text="View All"
-                    android:textAllCaps="false"
+                    android:layout_height="wrap_content"
+                    android:text="Decks"
+                    android:textColor="#1A1A1A"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/deckList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/decksTitle">
+
+                    <TextView
+                        android:id="@+id/tvNoDecks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No recent decks"
+                        android:textColor="#1A1A1A"
+                        android:visibility="gone"
+                        android:layout_marginBottom="8dp"/>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutDeck1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp">
+                        <TextView
+                            android:id="@+id/tvDeckName1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Common Phrases"
+                            android:textColor="#1A1A1A"
+                            android:textStyle="bold" />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/openButton1"
+                            android:layout_width="60dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/button_radius_8"
+                            android:text="Open"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutDeck2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp">
+                        <TextView
+                            android:id="@+id/tvDeckName2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="JLPT N5 Vocabulary"
+                            android:textColor="#1A1A1A"
+                            android:textStyle="bold" />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/openButton2"
+                            android:layout_width="60dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/button_radius_8"
+                            android:text="Open"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="10sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/showAllDecks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Show All"
                     android:textColor="#1A1A1A"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/deckList" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            <!-- Content Grid: Increased heights to fill the free space at the bottom -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/tealHeroBanner">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/paletteColumn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/posterCard"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <!-- Results Box: Extended height -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="220dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/red_rounded_bg"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="QUIZ RESULTS"
+                            android:textColor="#1A1A1A"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvNoQuizzes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="No recent quizzes"
+                            android:textColor="#FFFFFF"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/layoutQuiz1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+                            <TextView
+                                android:id="@+id/tvQuizName1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:text="Quiz 1"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvQuizDetails1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#CCCCCC"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutQuiz2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+                            <TextView
+                                android:id="@+id/tvQuizName2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Quiz 2"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvQuizDetails2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#CCCCCC"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutQuiz3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+                            <TextView
+                                android:id="@+id/tvQuizName3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Quiz 3"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvQuizDetails3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#CCCCCC"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutQuiz4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+                            <TextView
+                                android:id="@+id/tvQuizName4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Quiz 4"
+                                android:textColor="#FFFFFF"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/tvQuizDetails4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#CCCCCC"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Tools Box: Extended height -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="280dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/tan_rounded_bg"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TOOLS"
+                            android:textColor="#1A1A1A"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnQuizMode"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/button_radius_8"
+                            android:drawableTop="@drawable/ic_quiz"
+                            android:drawablePadding="4dp"
+                            android:paddingTop="8dp"
+                            android:gravity="center"
+                            android:text="Quiz Mode"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnCreateFlashcard"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@drawable/button_radius_8"
+                            android:drawableTop="@drawable/ic_flashcard"
+                            android:drawablePadding="4dp"
+                            android:paddingTop="8dp"
+                            android:gravity="center"
+                            android:text="Create Cards"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnBasicAlphabet"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@drawable/button_radius_8"
+                            android:drawableTop="@drawable/ic_alphabet"
+                            android:drawablePadding="4dp"
+                            android:paddingTop="8dp"
+                            android:gravity="center"
+                            android:text="Alphabet"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Lessons Card: Matches the height of the paletteColumn -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/posterCard"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1.2"
+                    app:layout_constraintStart_toEndOf="@id/paletteColumn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="#C1AB85"
+                    app:strokeWidth="2dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/books" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#801A1A1A" />
+
+                        <TextView
+                            android:id="@+id/lessonHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:text="LESSON LIST"
+                            android:textColor="#C1AB85"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnLessonList"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:layout_marginBottom="32dp"
+                            android:background="@drawable/tan_rounded_bg"
+                            android:paddingHorizontal="20dp"
+                            android:text="View All"
+                            android:textAllCaps="false"
+                            android:textColor="#1A1A1A"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

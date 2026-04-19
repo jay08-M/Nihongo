@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -28,7 +29,7 @@
                 android:includeFontPadding="false"
                 android:text="学習"
                 android:textColor="#3E6868"
-                android:textSize="60sp"
+                android:textSize="50sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -86,8 +87,6 @@
                     android:textColorHint="#5E5E5E" />
 
                 <!-- Flashcard List Container -->
-
-                <!-- Action Buttons -->
                 <LinearLayout
                     android:id="@+id/flashcardListContainer"
                     android:layout_width="match_parent"

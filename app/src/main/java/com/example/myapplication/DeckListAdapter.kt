@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class DeckListAdapter(
     private var decks: List<Deck>,
     private val onViewClick: (Deck) -> Unit,
+    private val onEditClick: (Deck) -> Unit,
     private val onDeleteClick: (Deck) -> Unit
 ) : RecyclerView.Adapter<DeckListAdapter.DeckViewHolder>() {
 
@@ -18,6 +19,7 @@ class DeckListAdapter(
         val tvDeckName: TextView = view.findViewById(R.id.tvDeckName)
         val tvCardCount: TextView = view.findViewById(R.id.tvCardCount)
         val btnViewDeck: Button = view.findViewById(R.id.btnViewDeck)
+        val btnEditDeck: Button = view.findViewById(R.id.btnEditDeck)
         val btnDeleteDeck: ImageButton = view.findViewById(R.id.btnDeleteDeck)
     }
 
@@ -31,6 +33,7 @@ class DeckListAdapter(
         holder.tvDeckName.text = deck.name
         holder.tvCardCount.text = "${deck.cards.size} cards"
         holder.btnViewDeck.setOnClickListener { onViewClick(deck) }
+        holder.btnEditDeck.setOnClickListener { onEditClick(deck) }
         holder.btnDeleteDeck.setOnClickListener { onDeleteClick(deck) }
     }
 

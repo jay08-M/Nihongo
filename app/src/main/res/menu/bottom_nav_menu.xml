@@ -20,4 +20,8 @@
         android:id="@+id/nav_decks"
         android:icon="@drawable/ic_flashcard"
         android:title="Decks" />
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
 </menu>

@@ -59,6 +59,12 @@
             android:name=".ViewDeckActivity"
             android:exported="false" />
         <activity
+            android:name=".EditDeckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".QuizSelectionActivity"
             android:exported="false" />
         <activity
