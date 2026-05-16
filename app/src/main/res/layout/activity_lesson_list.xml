@@ -16,7 +16,7 @@
         android:includeFontPadding="false"
         android:text="学習"
         android:textColor="#3E6868"
-        android:textSize="60sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,23 +49,17 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="16dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/stylizedNumber">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="Continue your learning journey:"
-                android:textColor="#5E5E5E"
-                android:textSize="14sp" />
-
-            <!-- Lesson Item 1 (Teal style) -->
+            <!-- Lesson 1: Teal -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,12 +69,13 @@
 
                 <TextView
                     android:id="@+id/lesson1Title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Lesson 1: Greetings"
+                    android:text="Lesson 1: Hiragana part 1"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +83,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Learn basic greetings and introductions."
+                    android:text="Learn your first few Hiragana characters."
                     android:textColor="#1A1A1A"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -99,19 +94,20 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnStartLesson1"
                     android:layout_width="80dp"
-                    android:layout_height="32dp"
+                    android:layout_height="36dp"
                     android:background="@drawable/button_radius_8"
+                    android:backgroundTint="#1A1A1A"
                     android:text="STUDY"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Lesson Item 2 (Tan style) -->
+            <!-- Lesson 2: Tan -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,12 +117,13 @@
 
                 <TextView
                     android:id="@+id/lesson2Title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Lesson 2: Numbers"
+                    android:text="Lesson 2: Hiragana Part 2"
                     android:textColor="#1A1A1A"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -134,7 +131,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Master counting from 1 to 100."
+                    android:text="Learn the rest of the hiragana characters"
                     android:textColor="#5E5E5E"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toStartOf="@+id/btnStartLesson2"
@@ -144,19 +141,20 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnStartLesson2"
                     android:layout_width="80dp"
-                    android:layout_height="32dp"
+                    android:layout_height="36dp"
                     android:background="@drawable/button_radius_8"
+                    android:backgroundTint="#1A1A1A"
                     android:text="STUDY"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Lesson Item 3 (Red style) -->
+            <!-- Lesson 3: Red -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,12 +164,13 @@
 
                 <TextView
                     android:id="@+id/lesson3Title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Lesson 3: Particles"
+                    android:text="Lesson 3: Hiragana Part 3"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -179,7 +178,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Introduction to wa, ga, and o particles."
+                    android:text="Learn to make voiced sounds using tenten and maru."
                     android:textColor="#1A1A1A"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -190,16 +189,255 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnStartLesson3"
                     android:layout_width="80dp"
-                    android:layout_height="32dp"
+                    android:layout_height="36dp"
                     android:background="@drawable/button_radius_8"
+                    android:backgroundTint="#1A1A1A"
                     android:text="STUDY"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Lesson 4: Teal -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/teal_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/lesson4Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Lesson 4: Special Characters"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Learn about ヴ, ゔ, wave dashes, and quotes."
+                    android:textColor="#1A1A1A"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lesson4Title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartLesson4"
+                    android:layout_width="80dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/button_radius_8"
+                    android:backgroundTint="#1A1A1A"
+                    android:text="STUDY"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Lesson 5: Tan -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/tan_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/lesson5Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Lesson 5: Katakana Part 1"
+                    android:textColor="#1A1A1A"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Introduction to Katakana with English loanwords."
+                    android:textColor="#5E5E5E"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lesson5Title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartLesson5"
+                    android:layout_width="80dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/button_radius_8"
+                    android:backgroundTint="#1A1A1A"
+                    android:text="STUDY"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Lesson 6: Red -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/red_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/lesson6Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Lesson 6: Katakana Part 2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Adding tenten and maru to make foreign sounds."
+                    android:textColor="#1A1A1A"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lesson6Title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartLesson6"
+                    android:layout_width="80dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/button_radius_8"
+                    android:backgroundTint="#1A1A1A"
+                    android:text="STUDY"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Lesson 7: Teal -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/teal_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/lesson7Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Lesson 7: Pronunciation Basics"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Master the sounds of Japanese."
+                    android:textColor="#1A1A1A"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lesson7Title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartLesson7"
+                    android:layout_width="80dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/button_radius_8"
+                    android:backgroundTint="#1A1A1A"
+                    android:text="STUDY"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Lesson 8: Tan -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/tan_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/lesson8Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Lesson 8: Reading Basics"
+                    android:textColor="#1A1A1A"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Learn how to read Japanese sentences and words."
+                    android:textColor="#5E5E5E"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartLesson8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lesson8Title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartLesson8"
+                    android:layout_width="80dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/button_radius_8"
+                    android:backgroundTint="#1A1A1A"
+                    android:text="STUDY"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

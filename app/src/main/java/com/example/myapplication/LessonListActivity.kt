@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -17,6 +18,9 @@ class LessonListActivity : AppCompatActivity() {
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigation.selectedItemId = R.id.nav_lessons
+
+        // Link buttons to their respective lesson layouts
+        setupLessonButtons()
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -57,6 +61,27 @@ class LessonListActivity : AppCompatActivity() {
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    private fun setupLessonButtons() {
+        val lessonButtons = mapOf(
+            R.id.btnStartLesson1 to R.layout.fragment_lesson_hiragana_part_one,
+            R.id.btnStartLesson2 to R.layout.fragment_lesson_hiragana_part_two,
+            R.id.btnStartLesson3 to R.layout.fragment_lesson_hiragana_part_three,
+            R.id.btnStartLesson4 to R.layout.fragment_lesson_special_characters,
+            R.id.btnStartLesson5 to R.layout.fragment_lesson_katakana,
+            R.id.btnStartLesson6 to R.layout.fragment_lesson_katakana_part_two,
+            R.id.btnStartLesson7 to R.layout.fragment_lesson_pronunciation,
+            R.id.btnStartLesson8 to R.layout.fragment_lesson_reading_basics
+        )
+
+        for ((buttonId, layoutId) in lessonButtons) {
+            findViewById<Button>(buttonId).setOnClickListener {
+                val intent = Intent(this, LessonDetailActivity::class.java)
+                intent.putExtra("LAYOUT_ID", layoutId)
+                startActivity(intent)
             }
         }
     }

@@ -19,4 +19,271 @@
     <string name="btn_alphabet">Alphabet</string>
     <string name="header_lesson_list">LESSON LIST</string>
     <string name="btn_view_all">View All</string>
+
+    <!-- Lesson 1: Hiragana Part 1 -->
+    <string name="lesson_hiragana_paragraph_1" translatable="false">
+        Welcome to the first ever lesson in our app!
+        \n\nYou will be learning the basics of Hiragana! 「ひらがな」
+        \n\nHiragana is one of the three main writing systems in Japanese or Nihongo. The other two are Katakana and Kanji.
+        \n\nHiragana → basic sounds and grammar
+        \nKatakana → foreign words
+        \nKanji → complex characters with meaning
+        \n\nLearning how to read Hiragana will bring you one-third of the way to reading Japanese and that is no joke.
+        \n\nLet\'s get started!
+    </string>
+
+    <string name="lesson_hiragana_paragraph_2" translatable="false">
+        We will be focusing on the basic sounds of Hiragana. These are actually familiar if you know English!
+        \nThese are A, E, I, O, and U. The only difference is the arrangement. In Japanese, these go in this order:
+        \n\nあ い う え お
+        \nor
+        \nA\t\tI\t\tU\t\tE\t\tO
+        \n\nThis is known as the A or あ row. This will be your best reference for the sequence of the Hiragana alphabet.
+    </string>
+
+    <string name="lesson_hiragana_paragraph_ka" translatable="false">
+        The \"Ka\" row (か、き、く、け、こ) is the second row of the Hiragana chart. It is formed by adding the \"k\" sound to the vowels. This is one of the most common rows you will encounter in many basic words like \"kami\" (paper) or \"koko\" (here).
+    </string>
+
+    <string name="lesson_hiragana_paragraph_sa" translatable="false">
+        The \"Sa\" row (さ、し、す、せ、そ) introduces the \"s\" sound. A key thing to remember is that \"si\" is written and pronounced as \"shi\" (し). It sounds like the \"she\" in \"sheep\".
+    </string>
+
+    <string name="lesson_hiragana_paragraph_ta" translatable="false">
+        The \"Ta\" row (た、ち、つ、て、と) introduces the \"t\" sound. This row has two unique pronunciations: \"ti\" becomes \"chi\" (ち) as in \"cheese\", and \"tu\" becomes \"tsu\" (つ) as in \"tsunami\".
+    </string>
+
+    <string name="lesson_hiragana_paragraph_na" translatable="false">
+        The \"Na\" row (な、に、ぬ、ね、の) follows the standard pattern of adding \"n\" to the vowels. This row is used in many common particles like \"na\" and \"ni\", and words like \"neko\" (cat).
+    </string>
+
+    <!-- Hiragana Part 2 Strings -->
+    <string name="lesson_hiragana_2_intro" translatable="false">
+        Welcome to Hiragana Part 2!
+        \n\nIn this lesson, we will cover the remaining characters of the basic Hiragana chart. These include the Ha, Ma, Ra, Ya and Wa rows, along with the single sound \"n\".
+    </string>
+
+    <string name="lesson_hiragana_paragraph_ha" translatable="false">
+        The \"Ha\" row (は、ひ、ふ、へ、ほ) introduces the \"h\" sound. Note that \"hu\" is pronounced as \"fu\" (ふ), like blowing out a candle.
+    </string>
+
+    <string name="lesson_hiragana_paragraph_ma" translatable="false">
+        The \"Ma\" row (ま、み、む、め、も) is straightforward, combining the \"m\" sound with the five vowels.
+    </string>
+
+    <string name="lesson_hiragana_paragraph_ya" translatable="false">
+        The \"Ya\" row (ya, yu, yo) only has three characters. They are formed with the \"y\" sound.
+    </string>
+
+    <string name="lesson_hiragana_paragraph_ra" translatable="false">
+        For (ら、り、る、れ、ろ), your tongue should flick the roof of your mouth once, very quickly, just behind your front teeth.
+        It’s not a full \“r\” sound, there’s no curling or tension. It’s more like a light tap and release.
+    </string>
+
+    <string name="lesson_hiragana_paragraph_wa_n" translatable="false">
+        Finally, we have the \"Wa\" row (わ、を) and the single consonant \"n\" (ん).
+        \n\n\"Wo\" (を) is primarily used as a grammatical particle and is often pronounced just like \"o\".
+        \n\n\"n\" (ん) is the only Hiragana character that doesn\'t end in a vowel. It can also be pronounced
+        as the letter \"m\"\ sound in some words.
+    </string>
+
+    <!-- Hiragana Part 3 Strings -->
+    <string name="lesson_hiragana_3_intro" translatable="false">
+        Okay, get this. You actually don\'t have to learn a bunch of brand new characters right now. We can just upgrade the ones you already know!
+        \n\nSee these two little dashes? We call them \"tenten\". Think of them as a harder first letter. When you add them, the sound gets harder and you get the next row.
+        \n\nAnd then there\'s this little circle, the \"maru\". It looks exactly like a tiny bubble, right? It\'s a special little rule that only works on the H-row to give it a popping sound.
+    </string>
+
+    <string name="lesson_hiragana_3_mnemonics" translatable="false">
+        Here is the neat trick to remembering all of these. Think of the tenten marks as just a \"harder\" version of the first letter:
+        \n\n- K becomes G
+        \n- S becomes Z
+        \n- T becomes D
+        \n- H becomes B
+        \n\nNow for that little maru bubble. Just remember that bubbles \"pop\" as in the letter \"p\"
+    </string>
+
+    <!-- Katakana Part 1 Strings -->
+    <string name="lesson_katakana_intro" translatable="false">
+        Welcome to Katakana Part 1!
+        \n\nKatakana is mainly used for foreign names, places, and loanwords. It looks more angular than Hiragana, but the sounds are exactly the same!
+    </string>
+    <string name="lesson_katakana_row_a" translatable="false">The \"A\" row (ア、イ、ウ、エ、オ) is the base of Katakana. Notice how sharp and straight the lines are compared to Hiragana.</string>
+    <string name="lesson_katakana_row_ka" translatable="false">The \"Ka\" row (カ、キ、ク、ケ、コ) sounds like \"ka, ki, ku, ke, ko\". \"Ka\" (カ) looks very similar to its Hiragana counterpart.</string>
+    <string name="lesson_katakana_row_sa" translatable="false">The \"Sa\" row (サ、シ、ス、セ、ソ) includes \"shi\" (シ). Be careful not to confuse it with \"tsu\" (ツ)!</string>
+    <string name="lesson_katakana_row_ta" translatable="false">The \"Ta\" row (タ、チ、ツ、テ、ト) includes \"chi\" (チ) and \"tsu\" (ツ).</string>
+    <string name="lesson_katakana_row_na" translatable="false">The \"Na\" row (ナ、ニ、ヌ、ネ、ノ) uses simple strokes. \"Ni\" (ニ) looks like the number two in Kanji.</string>
+    <string name="lesson_katakana_row_ha" translatable="false">The \"Ha\" row (ハ、ヒ、フ、ヘ、ホ) includes \"fu\" (フ).</string>
+    <string name="lesson_katakana_row_ma" translatable="false">The \"Ma\" row (マ、ミ、ム、メ、モ) follows the standard \"m\" sound.</string>
+    <string name="lesson_katakana_row_ya" translatable="false">The \"Ya\" row (ヤ、ユ、ヨ) only has three characters.</string>
+    <string name="lesson_katakana_row_ra" translatable="false">The \"Ra\" row (ラ、リ、ル、レ、ロ) sounds like a light flap, just like in Hiragana.</string>
+    <string name="lesson_katakana_row_wa_n" translatable="false">The \"Wa\" row (ワ、ヲ) and \"n\" (ン). \"N\" is frequently used at the end of foreign names.</string>
+
+    <!-- Katakana Part 2 Strings -->
+    <string name="lesson_katakana_2_intro" translatable="false">
+        Good news! The upgrade system you learned for Hiragana works exactly the same way here!
+        \n\nJust like before, adding two small strokes (tenten) or a tiny bubble (maru) changes the sound. Since Katakana is mostly for foreign loanwords, these voiced sounds are everywhere from food brands to tech terms!
+    </string>
+    <string name="lesson_katakana_2_mnemonics" translatable="false">
+        Let\'s refresh your memory with these tricks:
+        \n\n- K becomes G
+        \n- S becomes Z
+        \n- T becomes D
+        \n- H becomes B
+        \n- H becomes P
+        \n\nRemember that the same rule applies here like in the Hiragana lesson. That little maru bubble. Just remember that bubbles \"pop\" as in the letter \"p\"
+    </string>
+
+    <!-- Special Characters Strings -->
+    <string name="lesson_special_intro" translatable="false">
+        Beyond the basic Hiragana and Katakana charts, Japanese uses several special characters and punctuation marks that are essential for reading and writing correctly.
+    </string>
+
+    <string name="lesson_special_v_vu" translatable="false">
+        The character ヴ is used in Katakana to represent the \"V\" sound, which doesn\'t exist in native Japanese. It is often combined with small vowels: ヴァ (va), ヴィ (vi), ヴ (vu), ヴェ (ve), ヴォ (vo).
+    </string>
+
+    <string name="lesson_special_small_u" translatable="false">
+        The small ぅ (u) is less common than other small vowels but can be used in certain loanwords or to extend the sound of a preceding character in a stylized way, often in manga or informal speech.
+    </string>
+
+    <string name="lesson_special_chouonpu" translatable="false">
+        The horizontal bar ― or ー (Chōonpu) is used to indicate a long vowel sound. In Katakana, it is extremely common (e.g., ケーキ - kēki/cake). In Hiragana, long vowels are usually written with extra vowels, but the bar is sometimes seen in informal writing or signs.
+    </string>
+
+    <string name="lesson_special_wave" translatable="false">
+        The wave dash ～ (Nami dasshu) is used to indicate a range (like \"from... to...\") or to show that a sound is being drawn out in a friendly or sing-song tone at the end of a sentence.
+    </string>
+
+    <string name="lesson_special_exclamation_question" translatable="false">
+        The exclamation mark ！ and question mark ？ are used just like in English, though traditional Japanese often uses the particle 「か」 at the end of a sentence instead of a question mark.
+    </string>
+
+    <string name="lesson_special_quotes" translatable="false">
+        Japanese quotation marks are 「 」 (Kagi kakko). While English-style double quotes \" \" are also used (especially in digital media), the Japanese brackets are much more common in books and formal writing.
+    </string>
+
+    <!-- Kanji Alphabet Strings -->
+    <string name="kanji_intro_title">What is Kanji?</string>
+    <string name="kanji_intro_text">Kanji are logographic Chinese characters used in Japanese. Each character represents a meaning or concept. Learning them is essential for reading real Japanese text. Most Kanji have multiple readings: Onyomi and Kunyomi.</string>
+    <string name="kanji_numbers_title">Basic Numbers (1-10)</string>
+    <string name="kanji_days_title">Days of the Week</string>
+    <string name="kanji_nature_title">Nature &amp; Elements</string>
+    <string name="kanji_directions_title">Directions &amp; Position</string>
+    <string name="kanji_people_title">People &amp; Family</string>
+    <string name="kanji_time_title">Time &amp; Calendar</string>
+    <string name="kanji_adjectives_title">Common Adjectives</string>
+    <string name="kanji_verbs_title">Basic Verbs</string>
+    <string name="kanji_colors_title">Colors</string>
+    <string name="kanji_seasons_title">Seasons</string>
+    <string name="kanji_weather_title">Weather</string>
+    <string name="kanji_education_title">Education</string>
+
+    <!-- Kanji Details -->
+    <string name="kanji_num_1">一 (1)</string>
+    <string name="kanji_num_2">二 (2)</string>
+    <string name="kanji_num_3">三 (3)</string>
+    <string name="kanji_num_4">四 (4)</string>
+    <string name="kanji_num_5">五 (5)</string>
+    <string name="kanji_num_6">六 (6)</string>
+    <string name="kanji_num_7">七 (7)</string>
+    <string name="kanji_num_8">八 (8)</string>
+    <string name="kanji_num_9">九 (9)</string>
+    <string name="kanji_num_10">十 (10)</string>
+
+    <string name="kanji_mon">月 (Mon)</string>
+    <string name="kanji_tue">火 (Tue)</string>
+    <string name="kanji_wed">水 (Wed)</string>
+    <string name="kanji_thu">木 (Thu)</string>
+    <string name="kanji_fri">金 (Fri)</string>
+    <string name="kanji_sat">土 (Sat)</string>
+    <string name="kanji_sun">日 (Sun)</string>
+
+    <string name="kanji_nat_sun">日 (Sun)</string>
+    <string name="kanji_nat_moon">月 (Moon)</string>
+    <string name="kanji_nat_fire">火 (Fire)</string>
+    <string name="kanji_nat_water">水 (Water)</string>
+    <string name="kanji_nat_tree">木 (Tree)</string>
+    <string name="kanji_nat_gold">金 (Gold)</string>
+    <string name="kanji_nat_earth">土 (Earth)</string>
+    <string name="kanji_nat_mountain">山 (Mountain)</string>
+    <string name="kanji_nat_river">川 (River)</string>
+    <string name="kanji_nat_field">田 (Field)</string>
+
+    <string name="kanji_dir_up">上 (Up)</string>
+    <string name="kanji_dir_down">下 (Down)</string>
+    <string name="kanji_dir_left">左 (Left)</string>
+    <string name="kanji_dir_right">右 (Right)</string>
+    <string name="kanji_size_big">大 (Big)</string>
+    <string name="kanji_size_small">小 (Small)</string>
+
+    <string name="kanji_fam_person">人 (Person)</string>
+    <string name="kanji_fam_me">私 (Me)</string>
+    <string name="kanji_fam_father">父 (Father)</string>
+    <string name="kanji_fam_mother">母 (Mother)</string>
+    <string name="kanji_fam_child">子 (Child)</string>
+    <string name="kanji_fam_man">男 (Man)</string>
+    <string name="kanji_fam_woman">女 (Woman)</string>
+
+    <string name="kanji_time_now">今 (Now)</string>
+    <string name="kanji_time_year">年 (Year)</string>
+    <string name="kanji_time_hour">時 (Time)</string>
+
+    <string name="kanji_red">赤 (Red)</string>
+    <string name="kanji_blue">青 (Blue)</string>
+    <string name="kanji_white">白 (White)</string>
+    <string name="kanji_black">黒 (Black)</string>
+
+    <string name="kanji_spring">春 (Spring)</string>
+    <string name="kanji_summer">夏 (Summer)</string>
+    <string name="kanji_autumn">秋 (Autumn)</string>
+    <string name="kanji_winter">冬 (Winter)</string>
+
+    <string name="kanji_rain">雨 (Rain)</string>
+    <string name="kanji_snow">雪 (Snow)</string>
+    <string name="kanji_wind">風 (Wind)</string>
+    <string name="kanji_cloud">雲 (Cloud)</string>
+
+    <string name="kanji_study">学 (Study)</string>
+    <string name="kanji_school">校 (School)</string>
+    <string name="kanji_teacher">先生 (Teacher)</string>
+
+    <!-- Pronunciation Strings -->
+    <string name="pron_intro_title">Japanese Sounds</string>
+    <string name="pron_intro_text">Japanese pronunciation is actually very simple because every character always makes the same sound. There are no silent letters like in English!</string>
+    <string name="pron_vowels_title">The Five Vowels</string>
+    <string name="pron_vowels_text">A (ah), I (ee), U (oo), E (eh), O (oh). Master these, and you\'ve mastered Japanese sounds.</string>
+    <string name="pron_timing_title">Mora Timing</string>
+    <string name="pron_timing_text">Japanese is a rhythm-based language. Every character (mora) takes the exact same amount of time to say.</string>
+    <string name="pron_consonants_title">Consonants</string>
+    <string name="pron_consonants_text">Most consonants sound like English, except for the \'R\' sound which is a light tap behind the teeth.</string>
+    <string name="pron_pitch_title">Pitch Accent</string>
+    <string name="pron_pitch_text">Some words change meaning depending on whether your voice goes high or low, like \'Hashi\' (bridge) vs \'Hashi\' (chopsticks).</string>
+    <string name="pron_vowel_length_title">Long vs Short</string>
+    <string name="pron_vowel_length_text">Holding a vowel for two beats instead of one can change the word entirely! (e.g., Ojisan/Uncle vs Ojiisan/Grandfather).</string>
+    <string name="pron_n_title">The \'N\' Sound</string>
+    <string name="pron_n_text">The character \'n\' is unique because it can change sound slightly based on the next letter, sounding like \'n\', \'m\', or \'ng\'.</string>
+
+    <!-- Reading Basics Strings -->
+    <string name="reading_intro_title">Introduction</string>
+    <string name="reading_intro_text">Reading Japanese is a rewarding journey that combines three different scripts. Once you know the characters, the next step is understanding how they flow together to form words and sentences. This lesson will guide you through the fundamental rules of Japanese reading.</string>
+    <string name="reading_direction_title">Reading Direction</string>
+    <string name="reading_direction_text">In modern Japanese, text is often written horizontally from left to right, just like English. however, you will also see traditional vertical writing (tategaki), which is read from top to bottom, starting from the rightmost column.</string>
+    <string name="reading_basic_words_title">Basic Words</string>
+    <string name="reading_basic_words_desc">Here are some common words written in Hiragana and Katakana. Try reading them aloud!</string>
+    <string name="reading_double_consonant_title">Double Consonants (Sokuon)</string>
+    <string name="reading_double_consonant_text">The small \"っ\" (tsu) or \"ッ\" indicates a double consonant. It acts as a brief pause in the breath before the next sound.</string>
+    <string name="reading_long_vowel_title">Long Vowels</string>
+    <string name="reading_long_vowel_text">Vowels can be extended to change a word\'s meaning. In Hiragana, we add another vowel. In Katakana, we use a long dash \"ー\".</string>
+    <string name="reading_contracted_title">Contracted Sounds (Yōon)</string>
+    <string name="reading_contracted_text">Small versions of ya, yu, and yo (ゃ, ゅ, ょ) combine with certain characters to create a single syllable.</string>
+    <string name="reading_particles_title">Essential Particles</string>
+    <string name="reading_particles_text">Particles are small markers that show the relationship between words in a sentence. Note that some change their pronunciation when used as particles.</string>
+    <string name="reading_particle_wa_title">は (Wa) - Topic Marker</string>
+    <string name="reading_particle_wa_text">Though written as \"ha\", it is pronounced \"wa\" when marking the topic. Example: ねこ は かわいい (Neko wa kawaii) - Cats are cute.</string>
+    <string name="reading_particle_e_title">へ (E) - Direction Marker</string>
+    <string name="reading_particle_e_text">Though written as \"he\", it is pronounced \"e\" when indicating direction. Example: とうきょう へ いく (Toukyou e iku) - Go to Tokyo.</string>
+    <string name="reading_particle_wo_title">を (Wo/O) - Object Marker</string>
+    <string name="reading_particle_wo_text">This character is exclusively used as a particle to mark the direct object of a verb. Example: みず を のむ (Mizu o nomu) - Drink water.</string>
+
 </resources>
