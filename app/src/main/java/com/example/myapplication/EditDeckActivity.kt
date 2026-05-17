@@ -23,7 +23,7 @@ class EditDeckActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_deck)
 
-        dbHelper = DatabaseHelper(this)
+        dbHelper = DatabaseHelper.getInstance(this)
         userId = intent.getIntExtra("USER_ID", -1)
         val deckId = intent.getIntExtra("DECK_ID", -1)
 
@@ -61,7 +61,6 @@ class EditDeckActivity : AppCompatActivity() {
         
         val etFront = row.findViewById<EditText>(R.id.cardFrontInput)
         val etBack = row.findViewById<EditText>(R.id.cardBackInput)
-        // Check if it's an ImageButton or Button based on item_flashcard_input.xml
         val btnRemove = row.findViewById<View>(R.id.btnRemoveCard)
 
         etFront.setText(front)
@@ -89,17 +88,16 @@ class EditDeckActivity : AppCompatActivity() {
 
         val db = dbHelper.writableDatabase
         
-        // Use a transaction for better reliability
         db.beginTransaction()
         try {
             // 1. Update deck name
             val deckValues = android.content.ContentValues().apply {
-                put("deck_name", newName)
+                put(DatabaseHelper.COL_DECK_NAME, newName)
             }
-            db.update("decks", deckValues, "id = ?", arrayOf(deck.id.toString()))
+            db.update(DatabaseHelper.TABLE_DECKS, deckValues, "${DatabaseHelper.COL_ID} = ?", arrayOf(deck.id.toString()))
 
             // 2. Clear old cards
-            db.delete("flashcards", "deck_id = ?", arrayOf(deck.id.toString()))
+            db.delete(DatabaseHelper.TABLE_FLASHCARDS, "${DatabaseHelper.COL_DECK_ID_FK} = ?", arrayOf(deck.id.toString()))
 
             val newCards = mutableListOf<Flashcard>()
             // 3. Add current cards from UI
@@ -110,12 +108,14 @@ class EditDeckActivity : AppCompatActivity() {
 
                 if (front.isNotEmpty() && back.isNotEmpty()) {
                     val values = android.content.ContentValues().apply {
-                        put("deck_id", deck.id)
-                        put("front", front)
-                        put("back", back)
+                        put(DatabaseHelper.COL_DECK_ID_FK, deck.id)
+                        put(DatabaseHelper.COL_FRONT, front)
+                        put(DatabaseHelper.COL_BACK, back)
                     }
-                    val cardId = db.insert("flashcards", null, values)
-                    newCards.add(Flashcard(cardId.toInt(), deck.id, front, back))
+                    val cardId = db.insert(DatabaseHelper.TABLE_FLASHCARDS, null, values)
+                    if (cardId != -1L) {
+                        newCards.add(Flashcard(cardId.toInt(), deck.id, front, back))
+                    }
                 }
             }
             

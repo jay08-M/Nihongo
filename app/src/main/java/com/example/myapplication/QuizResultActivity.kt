@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class QuizResultActivity : AppCompatActivity() {
+    private var userId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_result)
 
+        userId = intent.getIntExtra("USER_ID", -1)
         val result = intent.getSerializableExtra("QUIZ_RESULT") as QuizResult
         val deck = intent.getSerializableExtra("SELECTED_DECK") as Deck
         val quizType = intent.getStringExtra("QUIZ_TYPE") ?: "MULTIPLE_CHOICE"
@@ -41,12 +43,14 @@ class QuizResultActivity : AppCompatActivity() {
                 Intent(this, IdentificationQuizActivity::class.java)
             }
             intent.putExtra("SELECTED_DECK", deck)
+            intent.putExtra("USER_ID", userId)
             startActivity(intent)
             finish()
         }
 
         btnBackToDecks.setOnClickListener {
             val intent = Intent(this, QuizSelectionActivity::class.java)
+            intent.putExtra("USER_ID", userId)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             finish()

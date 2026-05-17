@@ -18,7 +18,7 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        dbHelper = DatabaseHelper(this)
+        dbHelper = DatabaseHelper.getInstance(this)
         userId = intent.getIntExtra("USER_ID", -1)
 
         // Top Settings Button
@@ -65,20 +65,25 @@ class SecondActivity : AppCompatActivity() {
             startActivity(intent) 
         }
         
-        loadDecksFromDb()
-        updateRecentDecks()
-        updateRecentQuizzes()
+        loadDataFromDb()
     }
 
     override fun onResume() {
         super.onResume()
-        loadDecksFromDb()
-        updateRecentDecks()
-        updateRecentQuizzes()
+        loadDataFromDb()
+    }
+
+    private fun loadDataFromDb() {
+        if (userId != -1) {
+            loadDecksFromDb()
+            loadQuizResultsFromDb()
+            updateRecentDecks()
+            updateRecentQuizzes()
+        }
     }
 
     private fun loadDecksFromDb() {
-        if (userId != -1) {
+        try {
             val decks = dbHelper.getDecksForUser(userId)
             DeckManager.savedDecks.clear()
             for (deck in decks) {
@@ -87,10 +92,23 @@ class SecondActivity : AppCompatActivity() {
                 deck.cards.addAll(cards)
                 DeckManager.savedDecks.add(deck)
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun loadQuizResultsFromDb() {
+        try {
+            val results = dbHelper.getQuizResultsForUser(userId)
+            DeckManager.quizHistory.clear()
+            DeckManager.quizHistory.addAll(results)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     private fun updateRecentDecks() {
+        // Take last 2 added decks for this user
         val recentDecks = DeckManager.savedDecks.takeLast(2).reversed()
         
         val layout1 = findViewById<View>(R.id.layoutDeck1)
@@ -116,6 +134,7 @@ class SecondActivity : AppCompatActivity() {
             btnOpen1.setOnClickListener {
                 val intent = Intent(this, ViewDeckActivity::class.java)
                 intent.putExtra("DECK_DATA", recentDecks[0])
+                intent.putExtra("USER_ID", userId)
                 startActivity(intent)
             }
             
@@ -126,6 +145,7 @@ class SecondActivity : AppCompatActivity() {
                 btnOpen2.setOnClickListener {
                     val intent = Intent(this, ViewDeckActivity::class.java)
                     intent.putExtra("DECK_DATA", recentDecks[1])
+                    intent.putExtra("USER_ID", userId)
                     startActivity(intent)
                 }
             } else {
@@ -135,7 +155,8 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun updateRecentQuizzes() {
-        val recentQuizzes = DeckManager.quizHistory.takeLast(4).reversed()
+        // Fetch up to 4 most recent quizzes for the logged-in user
+        val recentQuizzes = DeckManager.quizHistory.take(4) // Already sorted by date DESC in DB helper
         val dateFormat = SimpleDateFormat("MMM dd, HH:mm", Locale.getDefault())
         
         val layouts = listOf(
@@ -177,6 +198,10 @@ class SecondActivity : AppCompatActivity() {
                     layouts[i].setOnClickListener {
                         val intent = Intent(this, QuizResultActivity::class.java)
                         intent.putExtra("QUIZ_RESULT", quiz)
+                        intent.putExtra("USER_ID", userId)
+                        // Note: If retrying from here, we might need the original Deck object
+                        // but since history only stores results, we'd need to fetch deck from DB or
+                        // pass it if available. For now, viewing results is prioritized.
                         startActivity(intent)
                     }
                 } else {

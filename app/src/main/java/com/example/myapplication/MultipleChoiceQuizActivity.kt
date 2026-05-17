@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 class MultipleChoiceQuizActivity : AppCompatActivity() {
 
     private lateinit var deck: Deck
+    private var userId: Int = -1
     private var currentQuestionIndex = 0
     private var score = 0
     private lateinit var shuffledCards: List<Flashcard>
     private val userAnswers = mutableListOf<UserAnswer>()
+    private lateinit var dbHelper: DatabaseHelper
 
     private lateinit var tvQuestionCount: TextView
     private lateinit var tvQuestionText: TextView
@@ -26,6 +28,8 @@ class MultipleChoiceQuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multiple_choice_quiz)
 
+        dbHelper = DatabaseHelper.getInstance(this)
+        userId = intent.getIntExtra("USER_ID", -1)
         deck = intent.getSerializableExtra("SELECTED_DECK") as Deck
         shuffledCards = deck.cards.shuffled()
 
@@ -52,7 +56,6 @@ class MultipleChoiceQuizActivity : AppCompatActivity() {
 
     private fun updateQuestion() {
         if (currentQuestionIndex >= shuffledCards.size) {
-            // All questions answered, show finish button and hide options
             findViewById<View>(R.id.optionsContainer).visibility = View.GONE
             btnFinishQuiz.visibility = View.VISIBLE
             return
@@ -69,7 +72,6 @@ class MultipleChoiceQuizActivity : AppCompatActivity() {
         val otherBacks = deck.cards.filter { it != currentCard }.map { it.back }.distinct().shuffled()
         options.addAll(otherBacks.take(3))
         
-        // If there are not enough unique options, add fillers
         while (options.size < 4) {
             options.add("Option ${options.size + 1}")
         }
@@ -108,13 +110,19 @@ class MultipleChoiceQuizActivity : AppCompatActivity() {
             wrongAnswers = shuffledCards.size - score,
             answersList = userAnswers
         )
-        
-        // Save to history
+
+        // Save to database for the specific user
+        if (userId != -1) {
+            dbHelper.saveQuizResult(userId, result)
+        }
+
+        // Also keep in memory for the current session (though database is primary source now)
         DeckManager.quizHistory.add(result)
 
         val intent = Intent(this, QuizResultActivity::class.java)
         intent.putExtra("QUIZ_RESULT", result)
-        intent.putExtra("SELECTED_DECK", deck) // Pass deck back for retry
+        intent.putExtra("SELECTED_DECK", deck)
+        intent.putExtra("USER_ID", userId)
         startActivity(intent)
         finish()
     }

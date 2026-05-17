@@ -20,7 +20,7 @@ class DeckListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deck_list)
 
-        dbHelper = DatabaseHelper(this)
+        dbHelper = DatabaseHelper.getInstance(this)
         userId = intent.getIntExtra("USER_ID", -1)
 
         val rvDeckList = findViewById<RecyclerView>(R.id.rvDeckList)

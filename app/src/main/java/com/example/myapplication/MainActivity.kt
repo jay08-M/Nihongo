@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         
-        dbHelper = DatabaseHelper(this)
+        dbHelper = DatabaseHelper.getInstance(this)
         
         // This will print all existing users to the Logcat tab immediately
         dbHelper.logAllUsers()

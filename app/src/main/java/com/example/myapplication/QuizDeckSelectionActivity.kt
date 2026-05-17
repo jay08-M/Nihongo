@@ -19,7 +19,7 @@ class QuizDeckSelectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_deck_selection)
 
-        dbHelper = DatabaseHelper(this)
+        dbHelper = DatabaseHelper.getInstance(this)
         userId = intent.getIntExtra("USER_ID", -1)
         val quizType = intent.getStringExtra("QUIZ_TYPE") ?: "MULTIPLE_CHOICE"
         

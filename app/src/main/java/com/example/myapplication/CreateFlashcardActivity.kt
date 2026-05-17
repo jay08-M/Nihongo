@@ -20,8 +20,15 @@ class CreateFlashcardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_flashcard)
 
-        dbHelper = DatabaseHelper(this)
+        dbHelper = DatabaseHelper.getInstance(this)
         userId = intent.getIntExtra("USER_ID", -1)
+
+        // Safety check for userId
+        if (userId == -1) {
+            Toast.makeText(this, "Error: User session lost. Please log in again.", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
 
         val deckNameInput = findViewById<EditText>(R.id.deckNameInput)
         val flashcardListContainer = findViewById<LinearLayout>(R.id.flashcardListContainer)
@@ -52,7 +59,6 @@ class CreateFlashcardActivity : AppCompatActivity() {
             flashcardListContainer.addView(newCardView)
         }
 
-        // Setup the initial card that is included in the layout
         if (flashcardListContainer.childCount > 0) {
             setupRemoveButton(flashcardListContainer.getChildAt(0))
         }
@@ -93,29 +99,49 @@ class CreateFlashcardActivity : AppCompatActivity() {
                 return null
             }
 
-            // Save to DB
-            val deckId = dbHelper.addDeck(userId, deckName)
-            if (deckId == -1L) {
-                Toast.makeText(this, "Failed to create deck in database", Toast.LENGTH_SHORT).show()
-                return null
+            val db = dbHelper.writableDatabase
+            var newDeck: Deck? = null
+
+            db.beginTransaction()
+            try {
+                val deckValues = android.content.ContentValues().apply {
+                    put(DatabaseHelper.COL_USER_ID_FK, userId)
+                    put(DatabaseHelper.COL_DECK_NAME, deckName)
+                }
+                val deckId = db.insert(DatabaseHelper.TABLE_DECKS, null, deckValues)
+
+                if (deckId == -1L) {
+                    throw Exception("Database rejected insertion (Check User ID: $userId)")
+                }
+
+                val flashcards = mutableListOf<Flashcard>()
+                for (input in flashcardInputs) {
+                    val cardValues = android.content.ContentValues().apply {
+                        put(DatabaseHelper.COL_DECK_ID_FK, deckId.toInt())
+                        put(DatabaseHelper.COL_FRONT, input.first)
+                        put(DatabaseHelper.COL_BACK, input.second)
+                    }
+                    val cardId = db.insert(DatabaseHelper.TABLE_FLASHCARDS, null, cardValues)
+                    if (cardId == -1L) throw Exception("Failed to insert flashcard")
+
+                    flashcards.add(Flashcard(id = cardId.toInt(), deckId = deckId.toInt(), front = input.first, back = input.second))
+                }
+
+                db.setTransactionSuccessful()
+                newDeck = Deck(id = deckId.toInt(), userId = userId, name = deckName, cards = flashcards.toMutableList())
+                DeckManager.savedDecks.add(newDeck)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Failed to create deck: ${e.message}", Toast.LENGTH_SHORT).show()
+            } finally {
+                db.endTransaction()
             }
 
-            val flashcards = mutableListOf<Flashcard>()
-            for (input in flashcardInputs) {
-                val cardId = dbHelper.addFlashcard(deckId.toInt(), input.first, input.second)
-                flashcards.add(Flashcard(id = cardId.toInt(), deckId = deckId.toInt(), front = input.first, back = input.second))
-            }
-
-            val newDeck = Deck(id = deckId.toInt(), userId = userId, name = deckName, cards = flashcards.toMutableList())
-            // Also add to the in-memory list for immediate display
-            DeckManager.savedDecks.add(newDeck)
             return newDeck
         }
 
         btnCreateFinal.setOnClickListener {
             val newDeck = saveDeckToDatabase()
             if (newDeck != null) {
-                Toast.makeText(this, "Deck '${newDeck.name}' saved!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, DeckListActivity::class.java)
                 intent.putExtra("USER_ID", userId)
                 startActivity(intent)
@@ -134,38 +160,21 @@ class CreateFlashcardActivity : AppCompatActivity() {
         }
 
         bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> { 
-                    val intent = Intent(this, SecondActivity::class.java)
-                    intent.putExtra("USER_ID", userId)
-                    startActivity(intent)
-                    finish()
-                    true 
-                }
-                R.id.nav_lessons -> { 
-                    val intent = Intent(this, LessonListActivity::class.java)
-                    intent.putExtra("USER_ID", userId)
-                    startActivity(intent)
-                    finish()
-                    true 
-                }
-                R.id.nav_quiz -> { 
-                    val intent = Intent(this, QuizModeActivity::class.java)
-                    intent.putExtra("USER_ID", userId)
-                    startActivity(intent)
-                    finish()
-                    true 
-                }
-                R.id.nav_alphabet -> { 
-                    val intent = Intent(this, BasicAlphabetActivity::class.java)
-                    intent.putExtra("USER_ID", userId)
-                    startActivity(intent)
-                    finish()
-                    true 
-                }
-                R.id.nav_decks -> true
-                else -> false
+            val targetActivity = when (item.itemId) {
+                R.id.nav_home -> SecondActivity::class.java
+                R.id.nav_lessons -> LessonListActivity::class.java
+                R.id.nav_quiz -> QuizModeActivity::class.java
+                R.id.nav_alphabet -> BasicAlphabetActivity::class.java
+                R.id.nav_decks -> DeckListActivity::class.java
+                else -> null
             }
+            if (targetActivity != null) {
+                val intent = Intent(this, targetActivity)
+                intent.putExtra("USER_ID", userId)
+                startActivity(intent)
+                finish()
+                true
+            } else false
         }
     }
 }

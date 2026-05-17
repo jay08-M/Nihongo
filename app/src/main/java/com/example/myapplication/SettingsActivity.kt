@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -17,7 +18,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        dbHelper = DatabaseHelper(this)
+        dbHelper = DatabaseHelper.getInstance(this)
         userId = intent.getIntExtra("USER_ID", -1)
 
         val etUsername = findViewById<EditText>(R.id.etNewUsername)
@@ -44,13 +45,14 @@ class SettingsActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val db = dbHelper.writableDatabase
-            val values = android.content.ContentValues()
-            if (newUsername.isNotEmpty()) values.put("username", newUsername)
-            if (newPassword.isNotEmpty()) values.put("password", newPassword)
+            // Using the new helper method to encapsulate logic
+            val success = dbHelper.updateUserProfile(
+                userId,
+                if (newUsername.isNotEmpty()) newUsername else null,
+                if (newPassword.isNotEmpty()) newPassword else null
+            )
 
-            val result = db.update("users", values, "id = ?", arrayOf(userId.toString()))
-            if (result > 0) {
+            if (success) {
                 Toast.makeText(this, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
                 etUsername.text.clear()
                 etPassword.text.clear()

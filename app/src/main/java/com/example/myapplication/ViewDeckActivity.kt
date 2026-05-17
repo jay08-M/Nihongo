@@ -9,11 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ViewDeckActivity : AppCompatActivity() {
+    private var userId: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_deck)
 
+        userId = intent.getIntExtra("USER_ID", -1)
         val deck = intent.getSerializableExtra("DECK_DATA") as? Deck
+
         if (deck == null) {
             finish()
             return
@@ -27,18 +31,26 @@ class ViewDeckActivity : AppCompatActivity() {
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigation.selectedItemId = R.id.nav_decks
+
         bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> { startActivity(Intent(this, SecondActivity::class.java)); finish(); true }
-                R.id.nav_lessons -> { startActivity(Intent(this, LessonListActivity::class.java)); finish(); true }
-                R.id.nav_quiz -> { startActivity(Intent(this, QuizModeActivity::class.java)); finish(); true }
-                R.id.nav_alphabet -> { startActivity(Intent(this, BasicAlphabetActivity::class.java)); finish(); true }
-                R.id.nav_decks -> {
-                    startActivity(Intent(this, DeckListActivity::class.java))
-                    finish()
-                    true
-                }
-                else -> false
+            val targetActivity = when (item.itemId) {
+                R.id.nav_home -> SecondActivity::class.java
+                R.id.nav_lessons -> LessonListActivity::class.java
+                R.id.nav_quiz -> QuizModeActivity::class.java
+                R.id.nav_alphabet -> BasicAlphabetActivity::class.java
+                R.id.nav_decks -> DeckListActivity::class.java
+                R.id.nav_settings -> SettingsActivity::class.java
+                else -> null
+            }
+
+            if (targetActivity != null) {
+                val intent = Intent(this, targetActivity)
+                intent.putExtra("USER_ID", userId)
+                startActivity(intent)
+                finish()
+                true
+            } else {
+                false
             }
         }
     }

@@ -12,22 +12,19 @@ import com.google.android.material.textfield.TextInputEditText
 class IdentificationQuizActivity : AppCompatActivity() {
 
     private lateinit var deck: Deck
+    private var userId: Int = -1
     private var currentQuestionIndex = 0
     private var score = 0
     private lateinit var shuffledCards: List<Flashcard>
     private val userAnswers = mutableListOf<UserAnswer>()
-
-    private lateinit var tvQuestionCount: TextView
-    private lateinit var tvQuestionText: TextView
-    private lateinit var progressBar: ProgressBar
-    private lateinit var etAnswer: TextInputEditText
-    private lateinit var btnSubmit: Button
-    private lateinit var btnFinishQuiz: Button
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_identification_quiz)
 
+        dbHelper = DatabaseHelper.getInstance(this)
+        userId = intent.getIntExtra("USER_ID", -1)
         deck = intent.getSerializableExtra("SELECTED_DECK") as Deck
         shuffledCards = deck.cards.shuffled()
 
@@ -53,6 +50,13 @@ class IdentificationQuizActivity : AppCompatActivity() {
 
         updateQuestion()
     }
+
+    private lateinit var tvQuestionCount: TextView
+    private lateinit var tvQuestionText: TextView
+    private lateinit var progressBar: ProgressBar
+    private lateinit var etAnswer: TextInputEditText
+    private lateinit var btnSubmit: Button
+    private lateinit var btnFinishQuiz: Button
 
     private fun updateQuestion() {
         if (currentQuestionIndex >= shuffledCards.size) {
@@ -97,12 +101,18 @@ class IdentificationQuizActivity : AppCompatActivity() {
             answersList = userAnswers
         )
         
-        // Save to history
+        // Save to database for the specific user
+        if (userId != -1) {
+            dbHelper.saveQuizResult(userId, result)
+        }
+
+        // Save to history (optional if database is used, but keeps memory consistent)
         DeckManager.quizHistory.add(result)
 
         val intent = Intent(this, QuizResultActivity::class.java)
         intent.putExtra("QUIZ_RESULT", result)
         intent.putExtra("SELECTED_DECK", deck)
+        intent.putExtra("USER_ID", userId)
         intent.putExtra("QUIZ_TYPE", "IDENTIFICATION")
         startActivity(intent)
         finish()
