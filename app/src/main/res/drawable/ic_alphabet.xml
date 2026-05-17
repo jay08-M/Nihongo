@@ -3,7 +3,11 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-  <path
-      android:fillColor="#FFFFFF"
-      android:pathData="M13,12H15L16,14H18L15,7H13L10,14H12L13,12M14,10L14.5,11H13.5L14,10M9,14V12C9,10.89 8.11,10 7,10V9C8.11,9 9,8.11 9,7V5C9,3.89 8.11,3 7,3H4V5H7V7C7,8.11 6.11,9 5,9V10C6.11,10 7,10.89 7,12V14H9M17,19V17C17,15.89 17.89,15 19,15V14C17.89,14 17,13.11 17,12V10C17,8.89 17.89,8 19,8H22V10H19V12C19,13.11 19.89,14 21,14V15C19.89,15 19,15.89 19,17V19H17Z"/>
+    <!-- Kanji character '字' (Character) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M12,3 v2 M5,8 v2 M5,8 h14 v2 M8,13 h8 M12,13 v5 c0,2 -1,3 -3,3 M6,17 h12" />
 </vector>

@@ -20,9 +20,17 @@ class QuizResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_quiz_result)
 
         userId = intent.getIntExtra("USER_ID", -1)
-        val result = intent.getSerializableExtra("QUIZ_RESULT") as QuizResult
-        val deck = intent.getSerializableExtra("SELECTED_DECK") as Deck
+
+        // Use safe casting to avoid crashes if extras are missing
+        val result = intent.getSerializableExtra("QUIZ_RESULT") as? QuizResult
+        if (result == null) {
+            finish()
+            return
+        }
+
+        val deck = intent.getSerializableExtra("SELECTED_DECK") as? Deck
         val quizType = intent.getStringExtra("QUIZ_TYPE") ?: "MULTIPLE_CHOICE"
+        val kanaMode = intent.getStringExtra("KANA_MODE")
 
         val tvScore = findViewById<TextView>(R.id.tvScore)
         val tvStats = findViewById<TextView>(R.id.tvStats)
@@ -37,19 +45,26 @@ class QuizResultActivity : AppCompatActivity() {
         rvReview.adapter = QuizReviewAdapter(result.answersList)
 
         btnRetry.setOnClickListener {
-            val intent = if (quizType == "MULTIPLE_CHOICE") {
-                Intent(this, MultipleChoiceQuizActivity::class.java)
-            } else {
-                Intent(this, IdentificationQuizActivity::class.java)
+            val retryIntent = when (quizType) {
+                "MULTIPLE_CHOICE" -> Intent(this, MultipleChoiceQuizActivity::class.java).apply {
+                    putExtra("SELECTED_DECK", deck)
+                }
+                "IDENTIFICATION" -> Intent(this, IdentificationQuizActivity::class.java).apply {
+                    putExtra("SELECTED_DECK", deck)
+                }
+                "KANA_EXAM" -> Intent(this, KanaQuizActivity::class.java).apply {
+                    putExtra("KANA_MODE", kanaMode)
+                }
+                else -> Intent(this, QuizModeActivity::class.java)
             }
-            intent.putExtra("SELECTED_DECK", deck)
-            intent.putExtra("USER_ID", userId)
-            startActivity(intent)
+
+            retryIntent.putExtra("USER_ID", userId)
+            startActivity(retryIntent)
             finish()
         }
 
         btnBackToDecks.setOnClickListener {
-            val intent = Intent(this, QuizSelectionActivity::class.java)
+            val intent = Intent(this, QuizModeActivity::class.java)
             intent.putExtra("USER_ID", userId)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)

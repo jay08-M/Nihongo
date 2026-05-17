@@ -80,6 +80,9 @@
             android:name=".IdentificationQuizActivity"
             android:exported="false" />
         <activity
+            android:name=".KanaQuizActivity"
+            android:exported="false" />
+        <activity
             android:name=".QuizResultActivity"
             android:exported="false" />
 

@@ -16,7 +16,16 @@ class QuizModeActivity : AppCompatActivity() {
 
         userId = intent.getIntExtra("USER_ID", -1)
 
-        // Setup Start Quiz Button
+        // Setup New Quiz Buttons
+        findViewById<Button>(R.id.btnStartHiraganaQuiz).setOnClickListener {
+            startKanaQuiz("HIRAGANA")
+        }
+
+        findViewById<Button>(R.id.btnStartKatakanaQuiz).setOnClickListener {
+            startKanaQuiz("KATAKANA")
+        }
+
+        // Setup Original Start Quiz Button (Custom Decks)
         findViewById<Button>(R.id.btnStartQuiz).setOnClickListener {
             val intent = Intent(this, QuizSelectionActivity::class.java)
             intent.putExtra("USER_ID", userId)
@@ -42,7 +51,7 @@ class QuizModeActivity : AppCompatActivity() {
                     finish()
                     true
                 }
-                R.id.nav_quiz -> true // Already here
+                R.id.nav_quiz -> true
                 R.id.nav_alphabet -> {
                     val intent = Intent(this, BasicAlphabetActivity::class.java)
                     intent.putExtra("USER_ID", userId)
@@ -67,5 +76,12 @@ class QuizModeActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    private fun startKanaQuiz(mode: String) {
+        val intent = Intent(this, KanaQuizActivity::class.java)
+        intent.putExtra("USER_ID", userId)
+        intent.putExtra("KANA_MODE", mode)
+        startActivity(intent)
     }
 }

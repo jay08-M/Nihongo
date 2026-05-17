@@ -8,7 +8,7 @@
     android:padding="20dp"
     tools:context=".QuizModeActivity">
 
-    <!-- Header Area: Matched to activity_second.xml and activity_basic_alphabet.xml -->
+    <!-- Header Area -->
     <TextView
         android:id="@+id/stylizedNumber"
         android:layout_width="wrap_content"
@@ -65,22 +65,113 @@
                 android:textColor="#5E5E5E"
                 android:textSize="14sp" />
 
-            <!-- Main Quiz Banner: Red style matching Dashboard Quiz Section -->
+            <!-- Hiragana Quiz Banner -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/hiraganaQuizBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/teal_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/hiraganaQuizTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hiragana Quiz"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Identification (Mixed) + Multiple Choice (Hiragana Only)"
+                    android:textColor="#1A1A1A"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartHiraganaQuiz"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hiraganaQuizTitle" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartHiraganaQuiz"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/button_radius_8"
+                    android:text="START"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Katakana Quiz Banner -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/katakanaQuizBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/tan_rounded_bg"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/katakanaQuizTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Katakana Quiz"
+                    android:textColor="#1A1A1A"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Identification (Mixed) + Multiple Choice (Katakana Only)"
+                    android:textColor="#5E5E5E"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartKatakanaQuiz"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/katakanaQuizTitle" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnStartKatakanaQuiz"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/button_radius_8"
+                    android:text="START"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Original Challenge Banner (Retained as "Custom Quiz") -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/quizBanner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/red_rounded_bg"
-                android:padding="24dp">
+                android:padding="20dp">
 
                 <TextView
                     android:id="@+id/quizBannerTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Challenge Yourself"
+                    android:text="Deck Challenge"
                     android:textColor="#FFFFFF"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -89,66 +180,33 @@
                     android:id="@+id/quizBannerDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Ready to test your knowledge? Take a quick quiz to see how much you've learned."
+                    android:layout_marginTop="4dp"
+                    android:text="Take a quiz from your custom flashcard decks."
                     android:textColor="#1A1A1A"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnStartQuiz"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/quizBannerTitle" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnStartQuiz"
-                    android:layout_width="120dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
                     android:background="@drawable/button_radius_8"
                     android:text="START"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/quizBannerDesc" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Secondary Card: Statistics or Info -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/tan_rounded_bg"
-                android:padding="20dp">
-
-                <TextView
-                    android:id="@+id/statsTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Your Progress"
-                    android:textColor="#1A1A1A"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="View your latest scores and mastery levels."
-                    android:textColor="#5E5E5E"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/statsTitle" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation Bar: Matched to activity_basic_alphabet.xml -->
+    <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"

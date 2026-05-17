@@ -3,7 +3,26 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-  <path
-      android:fillColor="#FFFFFF"
-      android:pathData="M11.07,12.85C11.15,14.03 11.94,15 13,15C14.11,15 15,14.11 15,13C15,12.2 14.39,11.53 13.59,11.13C12.44,10.56 11.45,9.65 11.45,8.13C11.45,6.13 13.25,4.5 15.5,4.5C17.75,4.5 19.5,6.13 19.5,8.13C19.5,8.81 19.26,9.44 18.86,9.93L19.92,11C20.6,10.2 21,9.21 21,8.13C21,5.06 18.53,2.5 15.5,2.5C12.47,2.5 10,5.06 10,8.13C10,10.18 11,11.5 12,12C12.4,12.2 12.6,12.5 12.6,13C12.6,13.22 12.5,13.5 12.33,13.5C12.17,13.5 12,13.33 12,13.13C12,12.88 11.82,12.62 11.5,12.45L11.07,12.85M13,17A1,1 0,0 0,12 18A1,1 0,0 0,13 19A1,1 0,0 0,14 18A1,1 0,0 0,13,17M5,20V6H9V4H5A2,2 0,0 0,3 6V20A2,2 0,0 0,5 22H19A2,2 0,0 0,21 20V16H19V20H5Z"/>
+    <!-- Question Bubble (Solid with Q cutout) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M14,2H4C2.9,2 2,2.9 2,4V12C2,13.1 2.9,14 4,14H5V17L8.5,14H14C15.1,14 16,13.1 16,12V4C16,2.9 15.1,2 14,2Z
+                  M9,11.5C7.6,11.5 6.5,10.4 6.5,9C6.5,7.6 7.6,6.5 9,6.5C10.4,6.5 11.5,7.6 11.5,9C11.5,9.5 11.4,10 11.1,10.4L12.5,11.8L11.5,12.8L10.2,11.4C9.8,11.5 9.4,11.5 9,11.5ZM9,10.2C9.7,10.2 10.3,9.7 10.3,9C10.3,8.3 9.7,7.8 9,7.8C8.3,7.8 7.7,8.3 7.7,9C7.7,9.7 8.3,10.2 9,10.2Z" />
+
+    <!-- Answer Bubble (Outline) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M20,9H11C9.9,9 9,9.9 9,11V19C9,20.1 9.9,21 11,21H14L17.5,24V21H20C21.1,21 22,20.1 22,19V11C22,9.9 21.1,9 20,9Z" />
+
+    <!-- Letter A -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M13.5,18 L15.5,13 L17.5,18 M14.2,16.5 H16.8" />
 </vector>
